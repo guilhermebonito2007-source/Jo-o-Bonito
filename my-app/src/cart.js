@@ -95,18 +95,6 @@ const PRODUCT_DETAILS = {
       { name: 'Tipo', label: 'Tipo', values: ['Talc:80 lavagens ', 'Azahar:72 lavagens', 'Delicate:72 lavagens', 'Reljante:72 lavagens', 'Marselha:72 lavagens'] }
     ]
 
-  },
-  'limpeza-Amaciador Para a Roupa da In': {
-    title: 'Amaciador Para a Roupa da In',
-    description: 'Amaciador especial para conservar cores e oferecer toque suave a cada lavagem.',
-    specs: {
-      'Volume': '2 L',
-      'Ação': ' ',
-      'Aplicação': 'Roupas brancas e coloridas'
-    },
-    options: [
-      { name: 'Aroma', label: 'Aroma', values: ['Sabão Azul e Branco:25 lavagens ', 'Detergente Sabão Natural:25 lavagens', 'Detergente Talco:22 lavagens'] },
-    ]
 
   },
   'limpeza-amaciador-da-san': {
@@ -119,20 +107,6 @@ const PRODUCT_DETAILS = {
     },
     options: [
       { name: 'Aroma', label: 'Aroma', values: ['Talco:60 Lavagens ', 'Radiante:60 Lavagens', 'Velvet:60 Lavagens'] },
-  
-    ]
-
- },
-  'limpeza-Amaciador Para a Roupa da In': {
-    title: 'Amaciador para a Roupa da In',
-    description: 'Amaciador especial para conservar cores e oferecer toque suave a cada lavagem.',
-    specs: {
-      'Volume': '2 L',
-      'Ação': 'Limpeza eficaz e frescor',
-      'Aplicação': 'Roupas brancas e coloridas'
-    },
-    options: [
-      { name: 'Aroma', label: 'Aroma', values: ['Talco Talcum:30 Lavagens ', 'Soft Blue:30 Lavagens', 'Soft Pink:30 Lavagens'] },
   
     ]
 
@@ -163,7 +137,20 @@ const PRODUCT_DETAILS = {
       { name: 'Aroma', label: 'Aroma', values: ['Clássico:45 dosses ', 'Marselha:45 dosses'] },
     ]
 
-},
+  },
+  'limpeza-detergente-para-a-roupa': {
+    title: 'Detergente Para a Roupa',
+    description: 'Detergente para a roupa com fórmula suave e eficaz para a limpeza diária.',
+    specs: {
+      'Volume': '1 L',
+      'Ação': 'Remove manchas e odores',
+      'Aplicação': 'Roupas brancas e coloridas'
+    },
+    options: [
+      { name: 'Aroma', label: 'Aroma', values: ['Neutro', 'Fresco', 'Lavanda'] },
+    ]
+
+  },
   'limpeza-detergente': {
     title: 'Detergente',
     description: 'Detergente para roupa com ação potente que remove manchas e mantém o tecido fresco.',
