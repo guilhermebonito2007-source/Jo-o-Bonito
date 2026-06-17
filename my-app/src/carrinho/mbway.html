@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento MB WAY</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body class="checkout-page">
+  <header>
+    <h1>Pagamento MB WAY</h1>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <p>Por favor preencha os dados MB WAY para completar o pagamento.</p>
+      <form id="mbwayForm" class="checkout-form">
+        <div>
+          <label for="mbwayName">Nome completo</label>
+          <input id="mbwayName" name="mbwayName" type="text" required placeholder="Nome completo" />
+        </div>
+        <div>
+          <label for="mbwayPhone">Número MB WAY</label>
+          <input id="mbwayPhone" name="mbwayPhone" type="tel" required placeholder="91X XXX XXX" />
+        </div>
+        <div>
+          <label for="mbwayReference">Referência de pagamento</label>
+          <input id="mbwayReference" name="mbwayReference" type="text" placeholder="Referência MB WAY" />
+        </div>
+        <div>
+          <label for="mbwayNotes">Observações</label>
+          <textarea id="mbwayNotes" name="mbwayNotes" rows="4" placeholder="Ex.: valor a pagar, NIF, etc."></textarea>
+        </div>
+        <button type="submit" class="checkout-button">Confirmar MB WAY</button>
+      </form>
+      <div class="cart-actions">
+        <a href="checkout.html">← Voltar para o resumo da compra</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../cart.js"></script>
+  <script>
+    // Processa o pagamento simulado do formulário MB WAY.
+    const mbwayForm = document.getElementById('mbwayForm');
+    mbwayForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Obrigado! Os seus dados MB WAY foram recebidos. Em breve iremos confirmar o pagamento.');
+      clearCart();
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>

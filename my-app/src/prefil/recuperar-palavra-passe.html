@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar palavra-passe</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="prefil.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">Recuperar palavra-passe</h1>
+    </div>
+  </header>
+
+  <a href="prefil.html" class="btn-voltar">← Voltar</a>
+
+  <div class="auth-section">
+    <main class="auth-container">
+      <h1>Defina a sua nova palavra-passe</h1>
+      <p style="text-align:center; color:#666; margin-bottom:24px;">Introduza a nova palavra-passe e confirme-a abaixo.</p>
+
+      <form id="recoverPasswordForm">
+        <div class="form-group">
+          <label for="newPassword">Nova palavra-passe:</label>
+          <input type="password" id="newPassword" name="newPassword" required autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar palavra-passe:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-submit">Guardar palavra-passe</button>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const recoverForm = document.getElementById('recoverPasswordForm');
+
+    if (recoverForm) {
+      recoverForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const newPassword = document.getElementById('newPassword').value.trim();
+        const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+        if (!newPassword || !confirmPassword) {
+          alert('Preencha os dois campos.');
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          alert('As palavras-passe não coincidem.');
+          return;
+        }
+
+        alert('Palavra-passe atualizada com sucesso.');
+        recoverForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>

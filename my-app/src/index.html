@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="module">
+  import CartAPI from './cart-api-integration.js';
+  
+  // Agora pode usar:
+  // CartAPI.loadProducts()
+  // CartAPI.handleAddToCart(id, qtd, options, price)
+  // CartAPI.handleCheckout(shipping, paymentMethod)
+</script>
+<body>
+    <div class="menu-container">
+        <button class="menu-button" id="menuButton">Menu</button>
+        <button class="menu-button" id="contatosButton">Contatos</button>
+        <button class="menu-button" id="historiaButton">História</button>
+        <button class="menu-button" id="informacaoButton">Informação</button>
+        <ul class="menu-list" id="menuList">
+          <li><a href="Produtos De Limpeza/Produtos De Limpeza.html">Produtos De Limpeza</a></li>
+            <li><a href="Produtos De Drogarias/Produtos De Drogarias.html">Produtos de Drogarias</a></li>
+            <li><a href="Fertilizantes/Fertilizantes.html">Fertilizantes</a></li>
+            <li><a href="Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html">Produtos De Higiene Pessoal</a></li>
+            <li><a href="produtos plasticos/produtos plasticos.html">Produtos Plásticos</a></li>
+        
+        </ul>
+        <div class="contatos-table" id="contatosTable" style="display: none;">
+            <table>
+                <tr>
+                    <th>Telefone</th>
+                    <td><strong>Armazem:</strong> 967154934</td>
+                    <td><strong>Escritório:</strong> 289713805</td>
+                    <td><strong>Comercial:</strong> 913849235</td>
+                    <td><strong>Comercial:</strong> 914190584</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>joao_bonito_1970@sapo.pt</td>
+                </tr>
+                <tr>
+                    <th>Endereço</th>
+                    <td>Estrada Nacional 125 Caixa Postal 752 A 8700 173-Olhão</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a href="https://www.google.com/maps/place/Belmonte+de+Baixo+(Z.+Comercial)/@37.0282399,-7.857256,687m/data=!3m1!1e3!4m9!1m2!2m1!1sEstrada+Nacional+125+Caixa+Postal+752+A+8700+173-Olh%C3%A3o!3m5!1s0xd0554b6d084b565:0xeb494601b30f4375!8m2!3d37.029613!4d-7.855182!16s%2Fg%2F11qpmsv__p?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Localização por mapa</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="history-box" id="historyBox" style="display: none;">
+            <h3>História</h3>
+            <p>A empresa João Bonito Produtos Químicos foi fundada no dia 21 de Setembro de 1970 pelo Sr. João Bonito é uma empresa familiar,a empresa é baseada a antiga portuguesa alguns produtos que vendemos são embalados a mão como os seguintes produtos: Carvão de 2k/3k/5k/ e sacos grandes, Cal em pedra de 5k/30k,Terra com fertilizante de vaca 10L/25L, Acido de 1L,Lixivia 1L/5L,Cimento em sacos de 2K,Enxofre 1K,Água Forte de 1L/5L. Depois de alguns anos o Sr. João Bonito decidiu deixar a empresa para o seu filho João Manuel Bonito no dia 3 de Março de 1995 para dar continuidade ao legado que o pai construiu mas infelizmente não conseguiu mandar a empresa devido a falta do mercado pequeno e por isso a empresa João Bonito Produtos Químicos decidiu encerrar as portas no dia 8  de Março de 2025. </p>
+        </div>
+        <div class="info-box" id="infoBox" style="display: none;">
+            <h3>Informação</h3>
+            <p>Neste momento a empresa  encontra-se fechada, por isso não faça a sua compra. Obrigado pela compreensão por parte do dono da empresa João Bonito.</p>
+        </div>
+    </div>
+
+    <div class="cart-badge">
+  <a href="carrinho/carrinho.html" title="Ver carrinho">
+    🛒
+    <span class="cart-count">0</span>
+  </a>
+</div>
+    <div class="profile-badge">
+      <a href="prefil/prefil.html" title="Meu Perfil">
+        <span class="profile-icon">👤</span>
+        <span class="profile-name">Perfil</span>
+      </a>
+    </div>
+    <header>
+        <div class="header-row">
+            <h1>João Bonito</h1>
+            <h2>Produtos Químicos</h2>
+        </div>
+            <div class="search-bar">
+                <input id="searchInput" type="text" placeholder="Pesquisar...">
+                <button id="searchButton" type="button">Buscar</button>
+            </div>
+        </div>
+        <!-- ...existing code... -->
+        <!-- ...existing code... -->
+    </header>
+    <script src="cart.js"></script>
+    <script>
+      // Atualiza o contador do carrinho sempre que a página carrega.
+      updateCartCount();
+
+      // Mostrar/ocultar o menu principal no cabeçalho.
+      document.getElementById('menuButton').addEventListener('click', function() {
+          const menuList = document.getElementById('menuList');
+          if (menuList.style.display === 'block') {
+              menuList.style.display = 'none';
+          } else {
+              menuList.style.display = 'block';
+          }
+      });
+
+      // Mostrar/ocultar a tabela de contactos.
+      document.getElementById('contatosButton').addEventListener('click', function() {
+          const contatosTable = document.getElementById('contatosTable');
+          if (contatosTable.style.display === 'block') {
+              contatosTable.style.display = 'none';
+          } else {
+              contatosTable.style.display = 'block';
+          }
+      });
+
+      document.getElementById('historiaButton').addEventListener('click', function() {
+          const historyBox = document.getElementById('historyBox');
+          if (historyBox.style.display === 'block') {
+              historyBox.style.display = 'none';
+          } else {
+              historyBox.style.display = 'block';
+          }
+      });
+
+      document.getElementById('informacaoButton').addEventListener('click', function() {
+          const infoBox = document.getElementById('infoBox');
+          if (infoBox.style.display === 'block') {
+              infoBox.style.display = 'none';
+          } else {
+              infoBox.style.display = 'block';
+          }
+      });
+
+      // Elementos usados para pesquisa de secções e produtos.
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+
+      const searchItems = [
+          {keywords: ['produtos de limpeza', 'limpeza', 'limpar', 'detergente líquido', 'desinfetante', 'desentupidor', 'limpa vidros', 'limpa movéis', 'limpa moveis', 'esponja multiuso', 'multiuso', 'balde', 'lixívia kiriko', 'limpa figorifico', 'limpa alumínio', 'lixívia lagarto', 'gel de casa de banho', 'amaciador', 'detergente para a roupa', 'amaciador da san', 'amaciador para a roupa da in', 'amaciador da fun', 'detergente da in 45 dosses', 'detergentes', 'lava tudo', 'loiça maquina/mão', 'limpeza profunda', 'cera/verniz', 'limpador da kiriko', 'esfergona tiras', 'detergente class', 'detergente lagarto', 'detergente', 'flota', 'gel kiriko roupa', 'vassora nº6', 'vasorões', 'escovas', 'esfregão salva unhas', 'lavavajillas', 'lava loiça da in', 'panos', 'lava tudo da in', 'vassora nº3', 'vassora atlântico', 'vassora de criança', 'limpa moveis', 'pinsel especial direito/cruvo-madeira', 'pinsel especial direito/cruvo-plastico', 'pinsel especial de madeira/plastico', 'espanadores', 'esfergonas de algodão da sibina', 'sacos do lixo de 130l', 'mopa de algodão de 45 cm', 'limpa teto', 'acido de 5l', 'acido de 1l'], href: 'Produtos De Limpeza/Produtos De Limpeza.html'},
+
+
+          {keywords: ['produtos de drogarias', 'drogarias', 'drogaria', 'antirreumáticos', 'antirreumaticos', 'vitaminas', 'analgésicos', 'analgesicos', 'creme dental', 'shampoo', 'sabonete', 'protetor solar', 'respirador'], href: 'Produtos De Drogarias/Produtos De Drogarias.html'},
+
+
+          {keywords: ['fertilizantes', 'Terra Vegetal 25kg', 'Esturme de Cavalo 50L', 'Cloreto de potássio', 'Corretivo Agrícola Orgânico', 'Esterco Curtido', 'Esterco de Vaca Granulado 25kg', 'Farinha de Osso', 'Hummus de Minhoca', 'Nitrofoska 25kg', 'Peters Professional Plant Starter', 'Adubo Osmocote 1kg', 'Sulfato de amônio', 'Superfosfato simples', 'Terra 10L', 'Terra 25L', 'Ureia', 'Yara Kristalon 25kg', 'YaraMila café', 'YaraMila complex', 'YaraMila Faster', 'YaraMila Olivo', 'YaraMila maizestar', 'Saco 50kg de Fertilizantes YARAMILA', 'Nitrato de cálcio'], href: 'Fertilizantes/Fertilizantes.html'},
+
+
+          {keywords: ['produtos de higiene pessoal', 'higiene pessoal', 'higiene', 'pessoal', 'sabonete líquido', 'sabonete liquido', 'xampu premium', 'xampú premium', 'desodorizante', 'creme para o corpo', 'escova de dente', 'fio dental', 'papel higiénico', 'papel higienico', 'toalhitas'], href: 'Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html'},
+
+          
+          {keywords: ['produtos plasticos', 'plasticos', 'plásticos', 'plástico', 'detergente líquido', 'desinfetante', 'desentupidor', 'limpa vidros', 'limpa movéis', 'limpa moveis', 'esponja multiuso', 'multiuso', 'balde', 'balde de construção', 'balde redondo', 'cesta para a roupa', 'açafate', 'funil', 'conjunto pá do lixo', 'espanador', 'escova sanitária com suporte', 'escova sanitária sem suporte'], href: 'produtos plasticos/produtos plasticos.html'}
+      ];
+      
+      function normalizeText(text) {
+          // Remove espaços, acentos e converte para minúsculas.
+          return text
+              .trim()
+              .toLowerCase()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+      }
+
+      // Procura o termo introduzido pelo utilizador e redireciona para a secção correta.
+      function performSearch() {
+          const query = normalizeText(searchInput.value);
+          if (!query) {
+              alert('Escreva o nome do produto ou seção que quer encontrar.');
+              return;
+          }
+
+          const match = searchItems.find(item =>
+              item.keywords.some(keyword => normalizeText(keyword).includes(query) || query.includes(normalizeText(keyword)))
+          );
+
+          if (match) {
+              window.location.href = match.href;
+          } else {
+              alert('Não foi possível encontrar uma seção ou produto com esse nome.');
+          }
+      }
+
+      // Liga a pesquisa ao botão e ao Enter no campo de texto.
+      searchButton.addEventListener('click', performSearch);
+      searchInput.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+              event.preventDefault();
+              performSearch();
+          }
+      });
+    </script>
+</body>
+</html>

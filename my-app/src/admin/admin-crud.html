@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin Completo - Loja João Bonito</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-left-color: white;
+        }
+
+        .sidebar a.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border-left-color: white;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .header button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .header button:hover {
+            background: #764ba2;
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* CARDS E TABELAS */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btns button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1>🔧 Admin Panel</h1>
+            <a class="nav-link active" onclick="showSection('dashboard')">📊 Dashboard</a>
+            <a class="nav-link" onclick="showSection('produtos')">📦 Produtos</a>
+            <a class="nav-link" onclick="showSection('categorias')">📂 Categorias</a>
+            <a class="nav-link" onclick="showSection('cupoes')">🎟️ Cupões</a>
+            <a class="nav-link" onclick="showSection('utilizadores')">👥 Utilizadores</a>
+            <a class="nav-link" onclick="showSection('contactos')">📞 Contactos</a>
+            <hr style="margin: 20px 0; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <a class="nav-link" onclick="logout()">🚪 Logout</a>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <h1 id="pageTitle">Dashboard</h1>
+                <button onclick="logout()">Logout</button>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <div id="alertContainer"></div>
+
+                <!-- DASHBOARD -->
+                <section id="dashboard" class="section active">
+                    <div class="card">
+                        <h2>📊 Estatísticas Gerais</h2>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalProducts">-</div>
+                                <div class="stat-label">Produtos</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalCategories">-</div>
+                                <div class="stat-label">Categorias</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalUsers">-</div>
+                                <div class="stat-label">Utilizadores</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="totalCoupons">-</div>
+                                <div class="stat-label">Cupões</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PRODUTOS -->
+                <section id="produtos" class="section">
+                    <div class="card">
+                        <h2>📦 Gestão de Produtos</h2>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="openProductModal()">+ Novo Produto</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th>Stock</th>
+                                    <th>Categoria</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="produtosTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CATEGORIAS -->
+                <section id="categorias" class="section">
+                    <div class="card">
+                        <h2>📂 Gestão de Categorias</h2>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="openCategoryModal()">+ Nova Categoria</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriasTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CUPÕES -->
+                <section id="cupoes" class="section">
+                    <div class="card">
+                        <h2>🎟️ Gestão de Cupões</h2>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="openCouponModal()">+ Novo Cupão</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Código</th>
+                                    <th>Tipo</th>
+                                    <th>Valor</th>
+                                    <th>Utilizações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cupoesTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- UTILIZADORES -->
+                <section id="utilizadores" class="section">
+                    <div class="card">
+                        <h2>👥 Gestão de Utilizadores</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Nome</th>
+                                    <th>Role</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="utilizadoresTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CONTACTOS -->
+                <section id="contactos" class="section">
+                    <div class="card">
+                        <h2>📞 Gestão de Contactos</h2>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="openContactModal()">+ Novo Contacto</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactosTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PRODUTO -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('productModal')">×</button>
+            <div class="modal-header" id="productModalTitle">Novo Produto</div>
+            <form id="productForm" onsubmit="saveProduct(event)">
+                <input type="hidden" id="productId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome *</label>
+                        <input type="text" id="productName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço *</label>
+                        <input type="number" id="productPrice" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Stock *</label>
+                        <input type="number" id="productStock" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria *</label>
+                        <select id="productCategory" required></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>SKU</label>
+                    <input type="text" id="productSKU">
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="productDescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>URL da Imagem</label>
+                    <input type="url" id="productImage">
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('productModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CATEGORIA -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('categoryModal')">×</button>
+            <div class="modal-header" id="categoryModalTitle">Nova Categoria</div>
+            <form id="categoryForm" onsubmit="saveCategory(event)">
+                <input type="hidden" id="categoryId">
+                <div class="form-group">
+                    <label>Nome *</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="categoryDescription" rows="4"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('categoryModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CUPÃO -->
+    <div class="modal" id="couponModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('couponModal')">×</button>
+            <div class="modal-header" id="couponModalTitle">Novo Cupão</div>
+            <form id="couponForm" onsubmit="saveCoupon(event)">
+                <input type="hidden" id="couponId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Código *</label>
+                        <input type="text" id="couponCode" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo *</label>
+                        <select id="couponType" required>
+                            <option value="percentage">Percentagem (%)</option>
+                            <option value="fixed">Valor Fixo (€)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Valor *</label>
+                        <input type="number" id="couponValue" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Máximo de Utilizações</label>
+                        <input type="number" id="couponMaxUses" value="999">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('couponModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONTACTO -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contactModal')">×</button>
+            <div class="modal-header" id="contactModalTitle">Novo Contacto</div>
+            <form id="contactForm" onsubmit="saveContact(event)">
+                <input type="hidden" id="contactId">
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="contactEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" id="contactPhone">
+                </div>
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" id="contactAddress">
+                </div>
+                <div class="form-group">
+                    <label>Cidade</label>
+                    <input type="text" id="contactCity">
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('contactModal')">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========== NAVIGATION ==========
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(section).classList.add('active');
+            event.target.classList.add('active');
+
+            // Update page title
+            const titles = {
+                dashboard: '📊 Dashboard',
+                produtos: '📦 Produtos',
+                categorias: '📂 Categorias',
+                cupoes: '🎟️ Cupões',
+                utilizadores: '👥 Utilizadores',
+                contactos: '📞 Contactos'
+            };
+            document.getElementById('pageTitle').textContent = titles[section] || 'Admin';
+
+            // Load data if needed
+            if (section === 'produtos') loadProducts();
+            else if (section === 'categorias') loadCategories();
+            else if (section === 'cupoes') loadCoupons();
+            else if (section === 'utilizadores') loadUsers();
+            else if (section === 'contactos') loadContacts();
+            else if (section === 'dashboard') loadDashboard();
+        }
+
+        // ========== MODALS ==========
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function showAlert(message, type = 'success') {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            document.getElementById('alertContainer').appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
+        }
+
+        // ========== DASHBOARD ==========
+        async function loadDashboard() {
+            try {
+                const [products, categories, users, coupons] = await Promise.all([
+                    fetch('/api/products').then(r => r.json()),
+                    fetch('/api/categories').then(r => r.json()),
+                    fetch('/api/users').then(r => r.json()),
+                    fetch('/api/coupons').then(r => r.json())
+                ]);
+
+                document.getElementById('totalProducts').textContent = products.length || 0;
+                document.getElementById('totalCategories').textContent = categories.length || 0;
+                document.getElementById('totalUsers').textContent = users.length || 0;
+                document.getElementById('totalCoupons').textContent = coupons.length || 0;
+            } catch (err) {
+                console.error('Erro ao carregar dashboard:', err);
+            }
+        }
+
+        // ========== PRODUTOS ==========
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                const tbody = document.getElementById('produtosTable');
+                tbody.innerHTML = '';
+
+                products.forEach(p => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${p.id}</td>
+                            <td>${p.name}</td>
+                            <td>€${parseFloat(p.price).toFixed(2)}</td>
+                            <td>${p.stock}</td>
+                            <td>${p.category_id}</td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-primary" onclick="editProduct(${p.id})">Editar</button>
+                                    <button class="btn btn-danger" onclick="deleteProduct(${p.id})">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                showAlert('Erro ao carregar produtos: ' + err.message, 'danger');
+            }
+        }
+
+        async function loadCategoryOptions() {
+            try {
+                const response = await fetch('/api/categories');
+                const categories = await response.json();
+                const select = document.getElementById('productCategory');
+                select.innerHTML = categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+            } catch (err) {
+                console.error('Erro ao carregar categorias:', err);
+            }
+        }
+
+        function openProductModal() {
+            document.getElementById('productId').value = '';
+            document.getElementById('productForm').reset();
+            document.getElementById('productModalTitle').textContent = 'Novo Produto';
+            loadCategoryOptions();
+            openModal('productModal');
+        }
+
+        async function editProduct(id) {
+            try {
+                const response = await fetch(`/api/products/${id}`);
+                const product = await response.json();
+                document.getElementById('productId').value = product.id;
+                document.getElementById('productName').value = product.name;
+                document.getElementById('productPrice').value = product.price;
+                document.getElementById('productStock').value = product.stock;
+                document.getElementById('productSKU').value = product.sku;
+                document.getElementById('productDescription').value = product.description;
+                document.getElementById('productImage').value = product.image_url;
+                document.getElementById('productModalTitle').textContent = 'Editar Produto';
+                loadCategoryOptions();
+                openModal('productModal');
+            } catch (err) {
+                showAlert('Erro ao carregar produto: ' + err.message, 'danger');
+            }
+        }
+
+        async function saveProduct(event) {
+            event.preventDefault();
+            const id = document.getElementById('productId').value;
+            const data = {
+                name: document.getElementById('productName').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                stock: parseInt(document.getElementById('productStock').value),
+                category_id: parseInt(document.getElementById('productCategory').value),
+                sku: document.getElementById('productSKU').value,
+                description: document.getElementById('productDescription').value,
+                image_url: document.getElementById('productImage').value
+            };
+
+            try {
+                const url = id ? `/api/management/products/${id}` : '/api/management/products';
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showAlert(id ? 'Produto atualizado!' : 'Produto criado!');
+                    closeModal('productModal');
+                    loadProducts();
+                } else {
+                    showAlert('Erro ao guardar produto', 'danger');
+                }
+            } catch (err) {
+                showAlert('Erro: ' + err.message, 'danger');
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm('Tem certeza que deseja eliminar este produto?')) return;
+            try {
+                const response = await fetch(`/api/management/products/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showAlert('Produto eliminado!');
+                    loadProducts();
+                }
+            } catch (err) {
+                showAlert('Erro ao eliminar: ' + err.message, 'danger');
+            }
+        }
+
+        // ========== CATEGORIAS ==========
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                const categories = await response.json();
+                const tbody = document.getElementById('categoriasTable');
+                tbody.innerHTML = '';
+
+                categories.forEach(c => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${c.name}</td>
+                            <td>${c.description || '-'}</td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-primary" onclick="editCategory(${c.id})">Editar</button>
+                                    <button class="btn btn-danger" onclick="deleteCategory(${c.id})">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                showAlert('Erro ao carregar categorias: ' + err.message, 'danger');
+            }
+        }
+
+        function openCategoryModal() {
+            document.getElementById('categoryId').value = '';
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryModalTitle').textContent = 'Nova Categoria';
+            openModal('categoryModal');
+        }
+
+        async function editCategory(id) {
+            try {
+                const response = await fetch(`/api/categories`);
+                const categories = await response.json();
+                const category = categories.find(c => c.id == id);
+                if (category) {
+                    document.getElementById('categoryId').value = category.id;
+                    document.getElementById('categoryName').value = category.name;
+                    document.getElementById('categoryDescription').value = category.description;
+                    document.getElementById('categoryModalTitle').textContent = 'Editar Categoria';
+                    openModal('categoryModal');
+                }
+            } catch (err) {
+                showAlert('Erro ao carregar categoria: ' + err.message, 'danger');
+            }
+        }
+
+        async function saveCategory(event) {
+            event.preventDefault();
+            const id = document.getElementById('categoryId').value;
+            const data = {
+                name: document.getElementById('categoryName').value,
+                description: document.getElementById('categoryDescription').value
+            };
+
+            try {
+                const url = id ? `/api/management/categories/${id}` : '/api/management/categories';
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showAlert(id ? 'Categoria atualizada!' : 'Categoria criada!');
+                    closeModal('categoryModal');
+                    loadCategories();
+                }
+            } catch (err) {
+                showAlert('Erro: ' + err.message, 'danger');
+            }
+        }
+
+        async function deleteCategory(id) {
+            if (!confirm('Tem certeza que deseja eliminar esta categoria?')) return;
+            try {
+                const response = await fetch(`/api/management/categories/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showAlert('Categoria eliminada!');
+                    loadCategories();
+                }
+            } catch (err) {
+                showAlert('Erro ao eliminar: ' + err.message, 'danger');
+            }
+        }
+
+        // ========== CUPÕES ==========
+        async function loadCoupons() {
+            try {
+                const response = await fetch('/api/coupons');
+                const coupons = await response.json();
+                const tbody = document.getElementById('cupoesTable');
+                tbody.innerHTML = '';
+
+                coupons.forEach(c => {
+                    const value = c.discount_type === 'percentage' ? c.discount_value + '%' : '€' + c.discount_value;
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${c.id}</td>
+                            <td><strong>${c.code}</strong></td>
+                            <td>${c.discount_type === 'percentage' ? 'Percentagem' : 'Valor Fixo'}</td>
+                            <td>${value}</td>
+                            <td>${c.used_count || 0} / ${c.max_uses || 999}</td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-primary" onclick="editCoupon(${c.id})">Editar</button>
+                                    <button class="btn btn-danger" onclick="deleteCoupon(${c.id})">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                showAlert('Erro ao carregar cupões: ' + err.message, 'danger');
+            }
+        }
+
+        function openCouponModal() {
+            document.getElementById('couponId').value = '';
+            document.getElementById('couponForm').reset();
+            document.getElementById('couponModalTitle').textContent = 'Novo Cupão';
+            openModal('couponModal');
+        }
+
+        async function editCoupon(id) {
+            try {
+                const response = await fetch(`/api/coupons`);
+                const coupons = await response.json();
+                const coupon = coupons.find(c => c.id == id);
+                if (coupon) {
+                    document.getElementById('couponId').value = coupon.id;
+                    document.getElementById('couponCode').value = coupon.code;
+                    document.getElementById('couponType').value = coupon.discount_type;
+                    document.getElementById('couponValue').value = coupon.discount_value;
+                    document.getElementById('couponMaxUses').value = coupon.max_uses;
+                    document.getElementById('couponModalTitle').textContent = 'Editar Cupão';
+                    openModal('couponModal');
+                }
+            } catch (err) {
+                showAlert('Erro ao carregar cupão: ' + err.message, 'danger');
+            }
+        }
+
+        async function saveCoupon(event) {
+            event.preventDefault();
+            const id = document.getElementById('couponId').value;
+            const data = {
+                code: document.getElementById('couponCode').value,
+                discount_type: document.getElementById('couponType').value,
+                discount_value: parseFloat(document.getElementById('couponValue').value),
+                max_uses: parseInt(document.getElementById('couponMaxUses').value)
+            };
+
+            try {
+                const url = id ? `/api/management/coupons/${id}` : '/api/management/coupons';
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showAlert(id ? 'Cupão atualizado!' : 'Cupão criado!');
+                    closeModal('couponModal');
+                    loadCoupons();
+                }
+            } catch (err) {
+                showAlert('Erro: ' + err.message, 'danger');
+            }
+        }
+
+        async function deleteCoupon(id) {
+            if (!confirm('Tem certeza que deseja eliminar este cupão?')) return;
+            try {
+                const response = await fetch(`/api/management/coupons/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showAlert('Cupão eliminado!');
+                    loadCoupons();
+                }
+            } catch (err) {
+                showAlert('Erro ao eliminar: ' + err.message, 'danger');
+            }
+        }
+
+        // ========== UTILIZADORES ==========
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const users = await response.json();
+                const tbody = document.getElementById('utilizadoresTable');
+                tbody.innerHTML = '';
+
+                users.forEach(u => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${u.id}</td>
+                            <td>${u.email}</td>
+                            <td>${u.name || '-'}</td>
+                            <td><strong>${u.role}</strong></td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-danger" onclick="deleteUser(${u.id})">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                showAlert('Erro ao carregar utilizadores: ' + err.message, 'danger');
+            }
+        }
+
+        async function deleteUser(id) {
+            if (!confirm('Tem certeza que deseja eliminar este utilizador?')) return;
+            try {
+                const response = await fetch(`/api/management/users/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showAlert('Utilizador eliminado!');
+                    loadUsers();
+                }
+            } catch (err) {
+                showAlert('Erro ao eliminar: ' + err.message, 'danger');
+            }
+        }
+
+        // ========== CONTACTOS ==========
+        async function loadContacts() {
+            try {
+                const response = await fetch('/api/contacts');
+                const contacts = await response.json();
+                const tbody = document.getElementById('contactosTable');
+                tbody.innerHTML = '';
+
+                contacts.forEach(c => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${c.email}</td>
+                            <td>${c.phone || '-'}</td>
+                            <td>${c.city || '-'}</td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="btn btn-primary" onclick="editContact(${c.id})">Editar</button>
+                                    <button class="btn btn-danger" onclick="deleteContact(${c.id})">Eliminar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                showAlert('Erro ao carregar contactos: ' + err.message, 'danger');
+            }
+        }
+
+        function openContactModal() {
+            document.getElementById('contactId').value = '';
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactModalTitle').textContent = 'Novo Contacto';
+            openModal('contactModal');
+        }
+
+        async function editContact(id) {
+            try {
+                const response = await fetch(`/api/contacts`);
+                const contacts = await response.json();
+                const contact = contacts.find(c => c.id == id);
+                if (contact) {
+                    document.getElementById('contactId').value = contact.id;
+                    document.getElementById('contactEmail').value = contact.email;
+                    document.getElementById('contactPhone').value = contact.phone || '';
+                    document.getElementById('contactAddress').value = contact.address || '';
+                    document.getElementById('contactCity').value = contact.city || '';
+                    document.getElementById('contactModalTitle').textContent = 'Editar Contacto';
+                    openModal('contactModal');
+                }
+            } catch (err) {
+                showAlert('Erro ao carregar contacto: ' + err.message, 'danger');
+            }
+        }
+
+        async function saveContact(event) {
+            event.preventDefault();
+            const id = document.getElementById('contactId').value;
+            const data = {
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                address: document.getElementById('contactAddress').value,
+                city: document.getElementById('contactCity').value
+            };
+
+            try {
+                const url = id ? `/api/management/contacts/${id}` : '/api/management/contacts';
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showAlert(id ? 'Contacto atualizado!' : 'Contacto criado!');
+                    closeModal('contactModal');
+                    loadContacts();
+                }
+            } catch (err) {
+                showAlert('Erro: ' + err.message, 'danger');
+            }
+        }
+
+        async function deleteContact(id) {
+            if (!confirm('Tem certeza que deseja eliminar este contacto?')) return;
+            try {
+                const response = await fetch(`/api/management/contacts/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    showAlert('Contacto eliminado!');
+                    loadContacts();
+                }
+            } catch (err) {
+                showAlert('Erro ao eliminar: ' + err.message, 'danger');
+            }
+        }
+
+        // ========== LOGOUT ==========
+        function logout() {
+            localStorage.removeItem('adminToken');
+            window.location.href = '/admin/admin-login.html';
+        }
+
+        // Verificar autenticação ao carregar
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('adminToken');
+            if (!token) {
+                window.location.href = '/admin/admin-login.html';
+            }
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>

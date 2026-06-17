@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Multibanco</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body class="checkout-page">
+  <header>
+    <h1>Pagamento Multibanco</h1>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <p>Por favor preencha os dados de Multibanco para completar o pagamento.</p>
+      <form id="multibancoForm" class="checkout-form">
+        <div>
+          <label for="multibancoName">Nome completo</label>
+          <input id="multibancoName" name="multibancoName" type="text" required placeholder="Nome completo" />
+        </div>
+        <div>
+          <label for="entidade">Entidade</label>
+          <input id="entidade" name="entidade" type="text" required placeholder="Entidade" />
+        </div>
+        <div>
+          <label for="referencia">Referência</label>
+          <input id="referencia" name="referencia" type="text" required placeholder="Referência" />
+        </div>
+        <div>
+          <label for="valor">Valor</label>
+          <input id="valor" name="valor" type="text" required placeholder="Valor a pagar" />
+        </div>
+        <div>
+          <label for="nif">NIF</label>
+          <input id="nif" name="nif" type="text" placeholder="NIF (opcional)" />
+        </div>
+        <button type="submit" class="checkout-button">Confirmar Multibanco</button>
+      </form>
+      <div class="cart-actions">
+        <a href="checkout.html">← Voltar para o resumo da compra</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../cart.js"></script>
+  <script>
+    // Processa o pagamento simulado do formulário Multibanco.
+    const multibancoForm = document.getElementById('multibancoForm');
+    multibancoForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Obrigado! Os seus dados de Multibanco foram recebidos. Em breve iremos confirmar o pagamento.');
+      clearCart();
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>

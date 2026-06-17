@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Transferência Bancária</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body class="checkout-page">
+  <header>
+    <h1>Pagamento por Transferência Bancária</h1>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <p>Por favor insira os dados da transferência bancária para completar a encomenda.</p>
+      <form id="transferForm" class="checkout-form">
+        <div>
+          <label for="transferName">Nome completo</label>
+          <input id="transferName" name="transferName" type="text" required placeholder="Nome completo" />
+        </div>
+        <div>
+          <label for="bankName">Nome do banco</label>
+          <input id="bankName" name="bankName" type="text" required placeholder="Banco" />
+        </div>
+        <div>
+          <label for="iban">IBAN</label>
+          <input id="iban" name="iban" type="text" required placeholder="PT50 0000 0000 0000 0000 0000 0" />
+        </div>
+        <div>
+          <label for="referenceTransfer">Referência</label>
+          <input id="referenceTransfer" name="referenceTransfer" type="text" required placeholder="Referência da transferência" />
+        </div>
+        <div>
+          <label for="transferNotes">Observações</label>
+          <textarea id="transferNotes" name="transferNotes" rows="4" placeholder="Ex.: NIF, valor, detalhes adicionais"></textarea>
+        </div>
+        <button type="submit" class="checkout-button">Confirmar Transferência</button>
+      </form>
+      <div class="cart-actions">
+        <a href="checkout.html">← Voltar para o resumo da compra</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../cart.js"></script>
+  <script>
+    // Processa o pagamento simulado do formulário de transferência bancária.
+    const transferForm = document.getElementById('transferForm');
+    transferForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Obrigado! Os seus dados de transferência foram recebidos. Iremos confirmar o pagamento em breve.');
+      clearCart();
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>
