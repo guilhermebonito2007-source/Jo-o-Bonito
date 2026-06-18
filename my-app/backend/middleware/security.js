@@ -34,7 +34,10 @@ const apiLimiter = rateLimit({
 // Middleware de Segurança Geral
 const securityMiddleware = (app) => {
   // Helmet - Define headers HTTP seguros
-  app.use(helmet());
+  // Permitir scripts inline do site porque a aplicação atual usa código inline em várias páginas HTML.
+  app.use(helmet({
+    contentSecurityPolicy: false
+  }));
   
   // Rate Limiting
   app.use(globalLimiter);
