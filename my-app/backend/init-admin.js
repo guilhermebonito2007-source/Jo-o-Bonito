@@ -3,11 +3,11 @@ const { getOne, runQuery } = require('./database');
 
 // Credenciais padrão do admin
 const DEFAULT_ADMIN = {
-  email: 'joao_bonito_1970@sapo.pt',
-  password: 'Admin123', // Mudar após primeira login!
-  firstName: 'João Bonito',
+  email: 'admin@loja.pt',
+  password: 'Admin@123', // Mudar após primeira login!
+  firstName: 'Admin',
   lastName: 'Loja',
-  phone: '910175058'
+  phone: '916000000'
 };
 
 const initializeAdmin = async () => {

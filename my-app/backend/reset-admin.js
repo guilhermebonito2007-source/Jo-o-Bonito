@@ -3,11 +3,11 @@ const { runQuery, getOne, initDatabase } = require('./database');
 
 // Novas credenciais do admin
 const NEW_ADMIN = {
-  email: 'joao_bonito_1970@sapo.pt',
-  password: 'Admin123',
-  firstName: 'João Bonito',
+  email: 'admin@loja.pt',
+  password: 'Admin@123',
+  firstName: 'Admin',
   lastName: 'Loja',
-  phone: '910175058'
+  phone: '916000000'
 };
 
 const resetAdmin = async () => {
