@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const { getAll, getOne, runQuery } = require('../database');
 
@@ -19,7 +19,7 @@ router.post('/products', async (req, res) => {
     ];
     
     const result = await runQuery(sql, params);
-    res.json({ id: result.lastID, message: 'Produto criado com sucesso' });
+    res.json({ id: result.id, message: 'Produto criado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -66,7 +66,7 @@ router.post('/categories', async (req, res) => {
     const { name, description } = req.body;
     const sql = 'INSERT INTO categories (name, description) VALUES (?, ?)';
     const result = await runQuery(sql, [name, description]);
-    res.json({ id: result.lastID, message: 'Categoria criada com sucesso' });
+    res.json({ id: result.id, message: 'Categoria criada com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -94,18 +94,20 @@ router.delete('/categories/:id', async (req, res) => {
   }
 });
 
-// ============ CUPÕES ============
+// ============ CUPÃ•ES ============
 
-// Criar cupão
+// Criar cupÃ£o
 router.post('/coupons', async (req, res) => {
   try {
     const { code, discount_type, discount_value, max_uses, used_count } = req.body;
+    const discountPercent = discount_type === 'percentage' ? discount_value : null;
+    const discountFixed = discount_type === 'fixed' ? discount_value : null;
     const sql = `
-      INSERT INTO coupon_codes (code, discount_type, discount_value, max_uses, used_count)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO coupon_codes (code, discount_percent, discount_fixed, max_uses, used_count, active)
+      VALUES (?, ?, ?, ?, ?, ?)
     `;
-    const result = await runQuery(sql, [code, discount_type, discount_value, max_uses || 999, used_count || 0]);
-    res.json({ id: result.lastID, message: 'Cupão criado com sucesso' });
+    const result = await runQuery(sql, [code, discountPercent, discountFixed, max_uses || 999, used_count || 0, 1]);
+    res.json({ id: result.id, message: 'Cupão criado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -115,23 +117,25 @@ router.post('/coupons', async (req, res) => {
 router.put('/coupons/:id', async (req, res) => {
   try {
     const { code, discount_type, discount_value, max_uses } = req.body;
+    const discountPercent = discount_type === 'percentage' ? discount_value : null;
+    const discountFixed = discount_type === 'fixed' ? discount_value : null;
     const sql = `
-      UPDATE coupon_codes 
-      SET code=?, discount_type=?, discount_value=?, max_uses=?
+      UPDATE coupon_codes
+      SET code=?, discount_percent=?, discount_fixed=?, max_uses=?
       WHERE id=?
     `;
-    await runQuery(sql, [code, discount_type, discount_value, max_uses, req.params.id]);
+    await runQuery(sql, [code, discountPercent, discountFixed, max_uses, req.params.id]);
     res.json({ message: 'Cupão atualizado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Eliminar cupão
+// Eliminar cupÃ£o
 router.delete('/coupons/:id', async (req, res) => {
   try {
     await runQuery('DELETE FROM coupon_codes WHERE id=?', [req.params.id]);
-    res.json({ message: 'Cupão eliminado com sucesso' });
+    res.json({ message: 'CupÃ£o eliminado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -166,10 +170,16 @@ router.delete('/users/:id', async (req, res) => {
 // Criar contacto
 router.post('/contacts', async (req, res) => {
   try {
-    const { email, phone, address, city } = req.body;
-    const sql = 'INSERT INTO contacts (email, phone, address, city) VALUES (?, ?, ?, ?)';
-    const result = await runQuery(sql, [email, phone, address, city]);
-    res.json({ id: result.lastID, message: 'Contacto criado com sucesso' });
+    const { name, email, phone, address, city, subject, message } = req.body;
+    const sql = 'INSERT INTO contacts (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)';
+    const result = await runQuery(sql, [
+      name || email,
+      email,
+      phone || '',
+      subject || city || 'Contacto',
+      message || address || 'Sem mensagem'
+    ]);
+    res.json({ id: result.id, message: 'Contacto criado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -178,9 +188,17 @@ router.post('/contacts', async (req, res) => {
 // Atualizar contacto
 router.put('/contacts/:id', async (req, res) => {
   try {
-    const { email, phone, address, city } = req.body;
-    const sql = 'UPDATE contacts SET email=?, phone=?, address=?, city=? WHERE id=?';
-    await runQuery(sql, [email, phone, address, city, req.params.id]);
+    const { name, email, phone, address, city, subject, message, status } = req.body;
+    const sql = 'UPDATE contacts SET name=?, email=?, phone=?, subject=?, message=?, status=? WHERE id=?';
+    await runQuery(sql, [
+      name || email,
+      email,
+      phone || '',
+      subject || city || 'Contacto',
+      message || address || 'Sem mensagem',
+      status || 'nao_lido',
+      req.params.id
+    ]);
     res.json({ message: 'Contacto atualizado com sucesso' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -198,3 +216,5 @@ router.delete('/contacts/:id', async (req, res) => {
 });
 
 module.exports = router;
+
+

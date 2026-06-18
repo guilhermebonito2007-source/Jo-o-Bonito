@@ -84,7 +84,7 @@ router.get('/:orderId', async (req, res) => {
     const items = await getAll(
       `SELECT oi.*, p.name, p.image_url 
        FROM order_items oi 
-       JOIN products p ON oi.product_id = p.id 
+       LEFT JOIN products p ON oi.product_id = p.id 
        WHERE oi.order_id = ?`,
       [req.params.orderId]
     );

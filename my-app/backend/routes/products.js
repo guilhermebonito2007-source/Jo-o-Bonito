@@ -25,6 +25,31 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/categories', async (req, res) => {
+  try {
+    const categories = await getAll('SELECT * FROM categories');
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get('/search', async (req, res) => {
+  try {
+    const query = `%${req.query.q || ''}%`;
+    const products = await getAll(
+      `SELECT p.*, COALESCE(c.name, 'Sem Categoria') as category
+       FROM products p
+       LEFT JOIN categories c ON p.category_id = c.id
+       WHERE p.name LIKE ? OR p.description LIKE ?`,
+      [query, query]
+    );
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Obter produto por ID
 router.get('/:id', async (req, res) => {
   try {
@@ -44,30 +69,6 @@ router.get('/:id', async (req, res) => {
     product.options = JSON.parse(product.options || '[]');
     
     res.json(product);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Obter categorias
-router.get('/categories', async (req, res) => {
-  try {
-    const categories = await getAll('SELECT * FROM categories');
-    res.json(categories);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Pesquisar produtos
-router.get('/search', async (req, res) => {
-  try {
-    const query = `%${req.query.q}%`;
-    const products = await getAll(
-      'SELECT * FROM products WHERE name LIKE ? OR description LIKE ?',
-      [query, query]
-    );
-    res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -95,12 +95,19 @@ router.post('/mbway/process', async (req, res) => {
   try {
     const { orderId, phone } = req.body;
 
-    // TODO: Implementar integração com API do MBWay
+    if (!orderId || !phone) {
+      return res.status(400).json({ error: 'orderId e phone são obrigatórios' });
+    }
+
+    const order = await getOne('SELECT total_price FROM orders WHERE id = ?', [orderId]);
+    if (!order) {
+      return res.status(404).json({ error: 'Encomenda não encontrada' });
+    }
+
     const result = await runQuery(
       `INSERT INTO payments (order_id, amount, method, status, reference)
-       SELECT id, total_price, ?, ?, ?
-       FROM orders WHERE id = ?`,
-      ['mbway', 'pendente', phone, orderId]
+       VALUES (?, ?, ?, ?, ?)`,
+      [orderId, order.total_price, 'mbway', 'pendente', phone]
     );
 
     res.json({
