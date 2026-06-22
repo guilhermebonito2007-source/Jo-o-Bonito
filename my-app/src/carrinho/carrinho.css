@@ -138,6 +138,10 @@ header {
   background: #e8e8ff;
 }
 
+.checkout-page header h1 {
+  color: #0000ff;
+}
+
 .cart-actions button:hover,
 .cart-actions a:hover {
   opacity: 0.9;
