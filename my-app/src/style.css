@@ -24,6 +24,7 @@ body {
   min-width: 150px;
   width: min(95vw, 260px);
   z-index: 11000;
+  pointer-events: auto;
 }
 
 .menu-list li {
@@ -59,8 +60,9 @@ body {
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
-    z-index: 10002;
+    z-index: 10003;
     max-width: calc(100vw - 20px);
+    pointer-events: auto;
 }
 
 

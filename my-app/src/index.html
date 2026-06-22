@@ -17,16 +17,16 @@
 </script>
 <body>
     <div class="menu-container">
-        <button class="menu-button" id="menuButton" type="button" onclick="(function(){console.log('debug: menuButton clicked');var e=document.getElementById('menuList'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked menu';})()">Menu</button>
-        <button class="menu-button" id="contatosButton" type="button" onclick="(function(){console.log('debug: contatosButton clicked');var e=document.getElementById('contatosTable'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked contatos';})()">Contatos</button>
-        <button class="menu-button" id="historiaButton" type="button" onclick="(function(){console.log('debug: historiaButton clicked');var e=document.getElementById('historyBox'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked historia';})()">História</button>
-        <button class="menu-button" id="informacaoButton" type="button" onclick="(function(){console.log('debug: informacaoButton clicked');var e=document.getElementById('infoBox'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked informacao';})()">Informação</button>
+        <button class="menu-button" id="menuButton" type="button">Menu</button>
+        <button class="menu-button" id="contatosButton" type="button">Contatos</button>
+        <button class="menu-button" id="historiaButton" type="button">História</button>
+        <button class="menu-button" id="informacaoButton" type="button">Informação</button>
         <ul class="menu-list" id="menuList">
-          <li><a href="Produtos De Limpeza/Produtos De Limpeza.html">Produtos De Limpeza</a></li>
-          <li><a href="produtos de drogarias/produtos de drogarias.html">Produtos de Drogarias</a></li>
+          <li><a href="Produtos%20De%20Limpeza/Produtos%20De%20Limpeza.html">Produtos De Limpeza</a></li>
+          <li><a href="produtos%20de%20drogarias/produtos%20de%20drogarias.html">Produtos de Drogarias</a></li>
           <li><a href="fertilizantes/fertilizantes.html">Fertilizantes</a></li>
-          <li><a href="Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html">Produtos De Higiene Pessoal</a></li>
-          <li><a href="produtos plasticos/produtos plasticos.html">Produtos Plásticos</a></li>
+          <li><a href="Produtos%20De%20Higiene%20Pessoal/Produtos%20De%20Higiene%20Pessoal.html">Produtos de Higiene Pessoal</a></li>
+          <li><a href="produtos%20plasticos/produtos%20plasticos.html">Produtos Plásticos</a></li>
         </ul>
         <div class="contatos-table" id="contatosTable" style="display: none;">
             <table>
@@ -80,13 +80,10 @@
             <h1>João Bonito</h1>
             <h2>Produtos Químicos</h2>
         </div>
-            <div class="search-bar">
-                <input id="searchInput" type="text" placeholder="Pesquisar...">
-                <button id="searchButton" type="button">Buscar</button>
-            </div>
+        <div class="search-bar">
+            <input id="searchInput" type="text" placeholder="Pesquisar...">
+            <button id="searchButton" type="button">Buscar</button>
         </div>
-        <!-- ...existing code... -->
-        <!-- ...existing code... -->
     </header>
         <script src="cart.js"></script>
         <script>
