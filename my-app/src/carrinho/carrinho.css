@@ -114,6 +114,14 @@
   border: 1px solid rgba(13, 13, 118, 0.2);
 }
 
+/* Position back button in top-left for checkout page */
+.checkout-page .cart-back {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 20002;
+}
+
 .cart-clear {
   border: none;
   background: #0d0d76;
