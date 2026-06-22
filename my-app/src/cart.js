@@ -469,13 +469,6 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Duração', label: 'Duração', values: ['1kg'] } ]
   },
 
-  'fert-sulfato': {
-    title: 'Sulfato de amônio',
-    description: 'Fonte rápida de nitrogênio para vegetação verde e vigorosa.',
-    specs: { 'Peso': '1 kg', 'Uso': 'Adubação nitrogenada' },
-    options: [ { name: 'Aplicação', label: 'Aplicação', values: ['1kg'] } ]
-  },
-
   'fert-superfosfato': {
     title: 'Superfosfato simples',
     description: 'Fertilizante fosfatado para desenvolvimento de raízes e flores.',
