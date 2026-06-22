@@ -5,33 +5,29 @@
     element.style.display = element.style.display === 'block' ? 'none' : 'block';
   }
 
-  function attachButton(id, callback) {
-    const button = document.getElementById(id);
-    if (!button) return;
-    button.addEventListener('click', function(event) {
-      event.preventDefault();
-      callback();
-    });
+  function handleAction(action) {
+    switch (action) {
+      case 'menu':
+        toggleDisplay('menuList');
+        break;
+      case 'contatos':
+        toggleDisplay('contatosTable');
+        break;
+      case 'historia':
+        toggleDisplay('historyBox');
+        break;
+      case 'informacao':
+        toggleDisplay('infoBox');
+        break;
+    }
   }
 
-  function attachMenuHandlers() {
-    attachButton('menuButton', function() {
-      toggleDisplay('menuList');
-    });
-    attachButton('contatosButton', function() {
-      toggleDisplay('contatosTable');
-    });
-    attachButton('historiaButton', function() {
-      toggleDisplay('historyBox');
-    });
-    attachButton('informacaoButton', function() {
-      toggleDisplay('infoBox');
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachMenuHandlers);
-  } else {
-    attachMenuHandlers();
-  }
+  // Use event delegation so handlers still work if DOM nodes are replaced.
+  document.addEventListener('click', function(event) {
+    const el = event.target.closest('[data-menu-action], #menuButton, #contatosButton, #historiaButton, #informacaoButton');
+    if (!el) return;
+    event.preventDefault();
+    const action = el.getAttribute('data-menu-action') || (el.id === 'menuButton' ? 'menu' : el.id === 'contatosButton' ? 'contatos' : el.id === 'historiaButton' ? 'historia' : el.id === 'informacaoButton' ? 'informacao' : null);
+    if (action) handleAction(action);
+  });
 })();
