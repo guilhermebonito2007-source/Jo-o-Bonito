@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -24,10 +24,10 @@
         </div>
         <div>
           <label for="address">Morada</label>
-          <input id="address" name="address" type="text" required placeholder="Rua, número, cidade" />
+          <input id="address" name="address" type="text" required placeholder="Rua, nÃºmero, cidade" />
         </div>
         <div>
-          <label for="contact">Número de telemóvel ou E-mail</label>
+                    <label for="contact">Numero de telemóvel ou E-mail</label>
           <input id="contact" name="contact" type="text" required placeholder="Telemóvel ou E-mail" />
         </div>
         <div>
@@ -51,9 +51,8 @@
       </form>
     </section>
 
-    <div class="cart-actions">
-      <a href="carrinho.html">← Voltar para o carrinho</a>
-    </div>
+   <div class="cart-actions"> 
+      <a href="carrinho.html">← Voltar para o carrinho</a>    </div>
   </main>
 
   <script src="../cart.js"></script>
@@ -62,12 +61,12 @@
     renderCheckoutSummary('checkoutSummary');
     updateCartCount();
 
-    // Funções para abrir cada tipo de pagamento numa nova aba.
+    // FunÃ§Ãµes para abrir cada tipo de pagamento numa nova aba.
     function openMbwayPage() {
       window.open('mbway.html', '_blank');
     }
 
-    function openMultibancoPage() {
+    function openMultibancoPage(  ) {
       window.open('multibanco.html', '_blank');
     }
 
@@ -79,9 +78,34 @@
       window.open('transferencia.html', '_blank');
     }
 
+    const API_BASE = 'http://localhost:3000/api';
+
+    function getLoggedUserId() {
+      try {
+        const user = JSON.parse(localStorage.getItem('lojaUserAuth') || 'null');
+        return user?.id || null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function buildOrderItems() {
+      return Object.values(getCart()).map(item => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: item.price,
+        selectedOptions: item.options || {}
+      }));
+    }
+
+    function getCartTotal() {
+      return Object.values(getCart()).reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0);
+
+    }
+
     // Valida o formulário de checkout e finaliza a encomenda.
     const checkoutForm = document.getElementById('checkoutForm');
-    checkoutForm.addEventListener('submit', function(event) {
+    checkoutForm.addEventListener('submit', async function(event) {
       event.preventDefault();
 
       const fullName = document.getElementById('fullName').value.trim();
@@ -90,6 +114,7 @@
       const birthDate = document.getElementById('birthDate').value;
       const postalCode = document.getElementById('postalCode').value.trim();
       const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+      const cartItems = buildOrderItems();
 
       if (!fullName || !address || !contact || !birthDate || !postalCode) {
         alert('Preencha todos os campos antes de enviar a encomenda.');
@@ -101,10 +126,57 @@
         return;
       }
 
-      alert('Obrigado! O seu pedido foi registado. Iremos contactá-lo em breve.');
-      clearCart();
-      window.location.href = '../index.html';
+      if (cartItems.length === 0) {
+        alert('O carrinho está vazio.');
+        return;
+      }
+
+      const submitButton = checkoutForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'A enviar...';
+
+      try {
+        const totalPrice = getCartTotal();
+        const orderResponse = await fetch(`${API_BASE}/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: getLoggedUserId(),
+            cartItems,
+            totalPrice,
+            paymentMethod: paymentMethod.value,
+            shippingAddress: { fullName, address, contact, birthDate, postalCode },
+            notes: ''
+          })
+        });
+
+        const orderData = await orderResponse.json();
+        if (!orderResponse.ok) {
+          throw new Error(orderData.error || 'Erro ao criar encomenda');
+        }
+
+        await fetch(`${API_BASE}/payments`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: orderData.orderId,
+            amount: totalPrice,
+            method: paymentMethod.value,
+            reference: orderData.orderNumber
+          })
+        });
+
+        alert(`Obrigado! A sua encomenda ${orderData.orderNumber} foi registada.`);
+        clearCart();
+        window.location.href = '../index.html';
+      } catch (error) {
+        console.error('Erro ao finalizar encomenda:', error);
+        alert(error.message || 'Erro ao finalizar encomenda. Tente novamente.');
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar encomenda';
+      }
     });
   </script>
 </body>
 </html>
+

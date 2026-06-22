@@ -1,6 +1,6 @@
 // Admin Panel Professional - Painel Administrativo Profissional
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = '/api';
 let currentAdmin = null;
 
 // ==================== INICIALIZAÇÃO ====================
@@ -94,6 +94,42 @@ function setupEventListeners() {
     }
 }
 
+// Delegated event listeners para botões das tabelas
+document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    const action = target.dataset.action;
+    const id = target.dataset.id ? parseInt(target.dataset.id, 10) : NaN;
+    if (Number.isNaN(id)) return;
+
+    switch (action) {
+        case 'view-order':
+            viewOrder(id);
+            break;
+        case 'delete-order':
+            deleteOrder(id);
+            break;
+        case 'edit-user':
+            editUser(id);
+            break;
+        case 'delete-user':
+            deleteUser(id);
+            break;
+        case 'edit-product':
+            editProduct(id);
+            break;
+        case 'delete-product':
+            deleteProduct(id);
+            break;
+        case 'view-contact':
+            viewContact(id);
+            break;
+        default:
+            break;
+    }
+});
+
 // ==================== NAVEGAÇÃO ====================
 function navigateToSection(section) {
     // Remover active de todas as seções
@@ -111,7 +147,10 @@ function navigateToSection(section) {
     }
 
     // Atualizar nav-link ativo
-    document.querySelector(`[data-section="${section}"]`).classList.add('active');
+    const activeLink = document.querySelector(`[data-section="${section}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
 
     // Atualizar título
     const titles = {
@@ -213,8 +252,8 @@ async function loadOrders() {
                 <td><span class="status-badge status-${order.payment_status}">${order.payment_status}</span></td>
                 <td>${new Date(order.created_at).toLocaleDateString('pt-PT')}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="viewOrder(${order.id})">Ver</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteOrder(${order.id})">Deletar</button>
+                    <button class="btn btn-small btn-primary" data-action="view-order" data-id="${order.id}">Ver</button>
+                    <button class="btn btn-small btn-danger" data-action="delete-order" data-id="${order.id}">Deletar</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -225,7 +264,7 @@ async function loadOrders() {
     }
 }
 
-async function searchOrders(e) {
+function searchOrders(e) {
     const searchTerm = e.target.value.toLowerCase();
     const rows = document.querySelectorAll('#ordersTableBody tr');
     
@@ -236,7 +275,18 @@ async function searchOrders(e) {
 }
 
 async function viewOrder(orderId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+    try {
+        const response = await fetch(`${API_BASE}/orders/${orderId}`);
+        if (!response.ok) {
+            showNotification('Encomenda não encontrada', 'error');
+            return;
+        }
+        const order = await response.json();
+        alert('Detalhes:\n' + JSON.stringify(order, null, 2));
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao carregar encomenda', 'error');
+    }
 }
 
 async function deleteOrder(orderId) {
@@ -279,8 +329,8 @@ async function loadUsers() {
                 <td>${user.city || '-'}</td>
                 <td>${new Date(user.created_at).toLocaleDateString('pt-PT')}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="editUser(${user.id})">Editar</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteUser(${user.id})">Deletar</button>
+                    <button class="btn btn-small btn-primary" data-action="edit-user" data-id="${user.id}">Editar</button>
+                    <button class="btn btn-small btn-danger" data-action="delete-user" data-id="${user.id}">Deletar</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -291,7 +341,7 @@ async function loadUsers() {
     }
 }
 
-async function searchUsers(e) {
+function searchUsers(e) {
     const searchTerm = e.target.value.toLowerCase();
     const rows = document.querySelectorAll('#usersTableBody tr');
     
@@ -302,7 +352,31 @@ async function searchUsers(e) {
 }
 
 async function editUser(userId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+    try {
+        const response = await fetch(`${API_BASE}/users/${userId}`);
+        if (!response.ok) {
+            showNotification('Utilizador não encontrado', 'error');
+            return;
+        }
+        const user = await response.json();
+        const newEmail = prompt('Novo email:', user.email);
+        if (newEmail && newEmail !== user.email) {
+            const updateResponse = await fetch(`${API_BASE}/users/${userId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: newEmail })
+            });
+            if (updateResponse.ok) {
+                showNotification('Utilizador atualizado com sucesso', 'success');
+                loadUsers();
+            } else {
+                showNotification('Erro ao atualizar utilizador', 'error');
+            }
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao editar utilizador', 'error');
+    }
 }
 
 async function deleteUser(userId) {
@@ -354,7 +428,7 @@ async function loadPayments() {
     }
 }
 
-async function filterPayments(e) {
+function filterPayments(e) {
     const method = e.target.value;
     const rows = document.querySelectorAll('#paymentsTableBody tr');
     
@@ -439,7 +513,7 @@ async function loadContacts() {
                 <td><span class="status-badge status-${contact.status}">${contact.status}</span></td>
                 <td>${new Date(contact.created_at).toLocaleDateString('pt-PT')}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="viewContact(${contact.id})">Ver</button>
+                    <button class="btn btn-small btn-primary" data-action="view-contact" data-id="${contact.id}">Ver</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -450,7 +524,18 @@ async function loadContacts() {
 }
 
 async function viewContact(contactId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+    try {
+        const response = await fetch(`${API_BASE}/contacts/${contactId}`);
+        if (!response.ok) {
+            showNotification('Contacto não encontrado', 'error');
+            return;
+        }
+        const contact = await response.json();
+        alert(`Contacto #${contact.id}\n\nNome: ${contact.name}\nEmail: ${contact.email}\nTelefone: ${contact.phone}\nStatus: ${contact.status}\nData: ${new Date(contact.created_at).toLocaleDateString('pt-PT')}`);
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao carregar contacto', 'error');
+    }
 }
 
 // ==================== PRODUTOS ====================
@@ -473,8 +558,8 @@ async function loadProducts() {
                 <td>${product.stock}</td>
                 <td>${product.category}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="editProduct(${product.id})">Editar</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})">Deletar</button>
+                    <button class="btn btn-small btn-primary" data-action="edit-product" data-id="${product.id}">Editar</button>
+                    <button class="btn btn-small btn-danger" data-action="delete-product" data-id="${product.id}">Deletar</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -485,7 +570,31 @@ async function loadProducts() {
 }
 
 async function editProduct(productId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+  try {
+        const response = await fetch(`${API_BASE}/products/${productId}`);
+        if (!response.ok) {
+            showNotification('Produto não encontrado', 'error');
+            return;
+        }
+        const product = await response.json();
+        const newName = prompt('Novo nome:', product.name);
+        if (newName && newName !== product.name) {
+            const updateResponse = await fetch(`${API_BASE}/products/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newName })
+            });
+            if (updateResponse.ok) {
+                showNotification('Produto atualizado com sucesso', 'success');
+                loadProducts();
+            } else {
+                showNotification('Erro ao atualizar produto', 'error');
+            }
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao editar produto', 'error');
+    }
 }
 
 async function deleteProduct(productId) {
