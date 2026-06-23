@@ -263,26 +263,6 @@
       // Atualiza o contador do carrinho na página do produto.
       updateCartCount();
 
-      // Alterna o menu principal no cabeçalho.
-      document.getElementById('menuButton').addEventListener('click', function() {
-          const menuList = document.getElementById('menuList');
-          if (menuList.style.display === 'block') {
-              menuList.style.display = 'none';
-          } else {
-              menuList.style.display = 'block';
-          }
-      });
-
-      // Alterna a visibilidade da tabela de contactos.
-      document.getElementById('contatosButton').addEventListener('click', function() {
-          const contatosTable = document.getElementById('contatosTable');
-          if (contatosTable.style.display === 'block') {
-              contatosTable.style.display = 'none';
-          } else {
-              contatosTable.style.display = 'block';
-          }
-      });
-
       // Cria uma camada de visualização de imagem ao clicar nas imagens dos produtos.
       document.addEventListener('DOMContentLoaded', function() {
         const overlay = document.createElement('div');

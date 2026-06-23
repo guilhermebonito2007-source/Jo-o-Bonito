@@ -1,4 +1,4 @@
-// Admin Panel Professional - Painel Administrativo Profissional
+// Painel Admin Profissional - Painel Administrativo Profissional
 
 const API_BASE = '/api';
 let currentAdmin = null;

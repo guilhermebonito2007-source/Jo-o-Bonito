@@ -92,48 +92,6 @@
                     if (typeof updateCartCount === 'function') updateCartCount();
                     console.log('index: DOMContentLoaded — attaching handlers');
 
-                    // Mostrar/ocultar o menu principal no cabeçalho.
-                    const menuButton = document.getElementById('menuButton');
-                    if (menuButton) {
-                        menuButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const menuList = document.getElementById('menuList');
-                            if (!menuList) return;
-                            menuList.style.display = (menuList.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
-
-                    // Mostrar/ocultar a tabela de contactos.
-                    const contatosButton = document.getElementById('contatosButton');
-                    if (contatosButton) {
-                        contatosButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const contatosTable = document.getElementById('contatosTable');
-                            if (!contatosTable) return;
-                            contatosTable.style.display = (contatosTable.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
-
-                    const historiaButton = document.getElementById('historiaButton');
-                    if (historiaButton) {
-                        historiaButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const historyBox = document.getElementById('historyBox');
-                            if (!historyBox) return;
-                            historyBox.style.display = (historyBox.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
-
-                    const informacaoButton = document.getElementById('informacaoButton');
-                    if (informacaoButton) {
-                        informacaoButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const infoBox = document.getElementById('infoBox');
-                            if (!infoBox) return;
-                            infoBox.style.display = (infoBox.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
-
                     // Elementos usados para pesquisa de secções e produtos.
                     const searchInput = document.getElementById('searchInput');
                     const searchButton = document.getElementById('searchButton');
