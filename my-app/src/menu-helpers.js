@@ -24,7 +24,12 @@
 
   // Use event delegation so handlers still work if DOM nodes are replaced.
   document.addEventListener('click', function(event) {
-    const el = event.target.closest('[data-menu-action], #menuButton, #contatosButton, #historiaButton, #informacaoButton');
+    const target = event.target;
+    const el = target && typeof target.closest === 'function'
+      ? target.closest('[data-menu-action], #menuButton, #contatosButton, #historiaButton, #informacaoButton')
+      : target.parentElement && target.parentElement.closest
+      ? target.parentElement.closest('[data-menu-action], #menuButton, #contatosButton, #historiaButton, #informacaoButton')
+      : null;
     if (!el) return;
     // diagnostic logging
     try { console.debug('[menu-helpers] click on', el.id || el.tagName, 'data-menu-action=', el.getAttribute('data-menu-action')); } catch (e) {}
