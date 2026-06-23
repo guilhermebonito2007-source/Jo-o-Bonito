@@ -17,10 +17,10 @@
 </script>
 <body>
     <div class="menu-container">
-        <button class="menu-button" id="menuButton" data-menu-action="menu" type="button">Menu</button>
-        <button class="menu-button" id="contatosButton" data-menu-action="contatos" type="button">Contatos</button>
-        <button class="menu-button" id="historiaButton" data-menu-action="historia" type="button">História</button>
-        <button class="menu-button" id="informacaoButton" data-menu-action="informacao" type="button">Informação</button>
+        <button class="menu-button" id="menuButton" onclick="toggleMenu('menuList')" type="button">Menu</button>
+        <button class="menu-button" id="contatosButton" onclick="toggleMenu('contatosTable')" type="button">Contatos</button>
+        <button class="menu-button" id="historiaButton" onclick="toggleMenu('historyBox')" type="button">História</button>
+        <button class="menu-button" id="informacaoButton" onclick="toggleMenu('infoBox')" type="button">Informação</button>
         <ul class="menu-list" id="menuList">
           <li><a href="produtos-de-limpeza/produtos-de-limpeza.html">Produtos De Limpeza</a></li>
           <li><a href="produtos-de-drogarias/produtos-de-drogarias.html">Produtos de Drogarias</a></li>
@@ -86,27 +86,17 @@
     </header>
         <script src="menu-helpers.js"></script>
         <script>
-            (function() {
-                function safeToggle(id) {
-                    var el = document.getElementById(id);
-                    if (!el) return;
-                    el.classList.toggle('open');
+            function toggleMenu(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                if (el.style.display === 'block') {
+                    el.style.display = 'none';
+                    el.classList.remove('open');
+                } else {
+                    el.style.display = 'block';
+                    el.classList.add('open');
                 }
-                var map = {
-                    menuButton: 'menuList',
-                    contatosButton: 'contatosTable',
-                    historiaButton: 'historyBox',
-                    informacaoButton: 'infoBox'
-                };
-                Object.keys(map).forEach(function(buttonId) {
-                    var btn = document.getElementById(buttonId);
-                    if (!btn) return;
-                    btn.addEventListener('click', function(event) {
-                        event.preventDefault();
-                        safeToggle(map[buttonId]);
-                    });
-                });
-            })();
+            }
         </script>
         <script src="cart.js"></script>
         <script>
