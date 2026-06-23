@@ -26,8 +26,13 @@
   document.addEventListener('click', function(event) {
     const el = event.target.closest('[data-menu-action], #menuButton, #contatosButton, #historiaButton, #informacaoButton');
     if (!el) return;
+    // diagnostic logging
+    try { console.debug('[menu-helpers] click on', el.id || el.tagName, 'data-menu-action=', el.getAttribute('data-menu-action')); } catch (e) {}
     event.preventDefault();
     const action = el.getAttribute('data-menu-action') || (el.id === 'menuButton' ? 'menu' : el.id === 'contatosButton' ? 'contatos' : el.id === 'historiaButton' ? 'historia' : el.id === 'informacaoButton' ? 'informacao' : null);
-    if (action) handleAction(action);
+    if (action) {
+      try { console.debug('[menu-helpers] resolved action=', action); } catch (e) {}
+      handleAction(action);
+    }
   });
 })();
