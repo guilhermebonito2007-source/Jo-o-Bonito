@@ -2,7 +2,7 @@
   function toggleDisplay(id) {
     const element = document.getElementById(id);
     if (!element) return;
-    element.style.display = element.style.display === 'block' ? 'none' : 'block';
+    element.classList.toggle('open');
   }
 
   function handleAction(action) {

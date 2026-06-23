@@ -27,6 +27,14 @@ body {
   pointer-events: auto;
 }
 
+/* Classe .open para controle via JS (mais confiável que inline styles) */
+.menu-list.open,
+.contatos-table.open,
+.history-box.open,
+.info-box.open {
+  display: block !important;
+}
+
 .menu-list li {
     border-bottom: 1px solid #ddd;
 }
