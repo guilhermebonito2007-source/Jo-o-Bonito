@@ -5,7 +5,7 @@
  */
 
 class ApiClient {
-  constructor(baseUrl = 'http://localhost:3000/api') {
+  constructor(baseUrl = '/api') {
     this.baseUrl = baseUrl;
     this.userId = localStorage.getItem('userId');
   }
