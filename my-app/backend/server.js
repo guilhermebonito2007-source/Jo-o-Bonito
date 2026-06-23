@@ -234,6 +234,14 @@ app.use(errorHandler);
 
 // ===== 404 Handler =====
 app.use((req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'Rota não encontrada' });
+  }
+
+  if (req.accepts('html')) {
+    return res.status(404).send(`<!doctype html><html lang="pt"><head><meta charset="utf-8"><title>404 Não encontrado</title></head><body><h1>404 Não encontrado</h1><p>A página solicitada não foi encontrada.</p></body></html>`);
+  }
+
   res.status(404).json({ error: 'Rota não encontrada' });
 });
 

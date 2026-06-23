@@ -81,21 +81,6 @@ const PRODUCT_DETAILS = {
     options: [
       { name: 'Aroma', label: 'Aroma', values: ['Gel WC Limón Com Cor', 'Gel WC Oceano', 'Limpador WC Eucalipto', 'Gel WC Pinho', 'Limpador WC Limón Sem cor'] },
     ]
-
-  },
-  'limpeza-amaciador': {
-    title: 'Amaciador',
-    description: 'Amaciador de roupa que deixa os tecidos macios, perfumados e fáceis de passar.',
-    specs: {
-      'Volume': '2 L',
-      'Tipo': 'Líquido',
-      'Uso': 'Roupas brancas e coloridas'
-    },
-    options: [
-      { name: 'Tipo', label: 'Tipo', values: ['Talc:80 lavagens ', 'Azahar:72 lavagens', 'Delicate:72 lavagens', 'Reljante:72 lavagens', 'Marselha:72 lavagens'] }
-    ]
-
-
   },
   'limpeza-amaciador-da-san': {
     title: 'Amaciador da San',
@@ -484,13 +469,6 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Duração', label: 'Duração', values: ['1kg'] } ]
   },
 
-  'fert-sulfato': {
-    title: 'Sulfato de amônio',
-    description: 'Fonte rápida de nitrogênio para vegetação verde e vigorosa.',
-    specs: { 'Peso': '1 kg', 'Uso': 'Adubação nitrogenada' },
-    options: [ { name: 'Aplicação', label: 'Aplicação', values: ['1kg'] } ]
-  },
-
   'fert-superfosfato': {
     title: 'Superfosfato simples',
     description: 'Fertilizante fosfatado para desenvolvimento de raízes e flores.',
@@ -708,19 +686,6 @@ const PRODUCT_DETAILS = {
       'Uso': 'Cuidados pessoais e limpeza leve',
     },
     options: [ { name: 'Cor', label: 'Cor', values: ['Branco'] } ]
-  },
-
-  'higiene-champoo': {
-    title: 'Châmpoo Premium',
-    description: 'Châmpoo nutritivo para cabelos normais e secos.',
-    specs: {
-      'Volume': '750 ml',
-      'Benefício': 'Brilho e hidratação',
-      'Uso': 'Cabelos normais a secos'
-    },
-    options: [
-      { name: 'Tipo', label: 'Tipo', values: ['3 em 1', 'Anti-caspa', 'Frutos'] },
-    ]
   },
   'higiene-esponja': {
     title: 'Esponja Redonda',

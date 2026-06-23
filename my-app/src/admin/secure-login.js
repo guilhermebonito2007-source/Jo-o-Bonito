@@ -1,5 +1,5 @@
 // Secure Login - Script separado para CSP compliance
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 let currentToken = null;
 let currentUser = null;
 
