@@ -85,6 +85,29 @@
         </div>
     </header>
         <script src="menu-helpers.js"></script>
+        <script>
+            (function() {
+                function safeToggle(id) {
+                    var el = document.getElementById(id);
+                    if (!el) return;
+                    el.classList.toggle('open');
+                }
+                var map = {
+                    menuButton: 'menuList',
+                    contatosButton: 'contatosTable',
+                    historiaButton: 'historyBox',
+                    informacaoButton: 'infoBox'
+                };
+                Object.keys(map).forEach(function(buttonId) {
+                    var btn = document.getElementById(buttonId);
+                    if (!btn) return;
+                    btn.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        safeToggle(map[buttonId]);
+                    });
+                });
+            })();
+        </script>
         <script src="cart.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
