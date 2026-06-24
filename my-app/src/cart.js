@@ -594,7 +594,7 @@ const PRODUCT_DETAILS = {
   },
 
 
-  'plastico-Balde de Construção': {
+  'plastico-balde-construcao': {
     title: 'Balde de Construção',
     description: 'Balde de construção de plástico para uso em obras.',
     specs: {
@@ -638,7 +638,7 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Tipo', label: 'Tipo', values: [ 'Grande'] } ]
   },
 
-  'plastico-açafate': {
+  'plastico-acafate': {
     title: 'Açafate Plástico',
     description: 'Cesta para a roupa seca.',
     specs: {
@@ -646,7 +646,7 @@ const PRODUCT_DETAILS = {
       'Material': 'Polietileno de alta densidade',
       'Uso': 'Armazenamento'
     },
-    options: [ { name: 'Capacidade', label: 'Capacidade', values: ['Grande'] } ]
+    options: [ { name: 'Capacidade', label: 'Capacidade', values: ['Azul', 'Verde', 'Vermelho', 'Rosa', 'Cinza'] } ]
   },
 
   'plastico-funil': {
@@ -678,7 +678,7 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Cor', label: 'Cor', values: ['Azul', 'Branco', 'Preto','Rosa'] } ]
   },
 
-  'plastico-escova-savitaria-sem-suporte': {
+  'plastico-escova-sem-suporte': {
     title: 'Escova Sanitária sem Suporte',
     description: 'Escova sanitária sem suporte de plástico resistente para limpeza eficaz do banheiro.',
     specs: {
@@ -686,73 +686,6 @@ const PRODUCT_DETAILS = {
     },
     options: [ { name: 'Cor', label: 'Cor', values: ['Branco'] } ]
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -844,7 +777,7 @@ const PRODUCT_DETAILS = {
       { name: 'Pacote', label: 'Pacote', values: ['2 rolos'] },
     ]
   },
-  'higiene-sabonete-líquido': {
+  'higiene-sabonete-liquido': {
     title: 'Sabonete Líquido',
     description: 'Sabonete líquido para uso diário com ação limpeza e hidratação.',
     specs: {
@@ -1227,8 +1160,13 @@ function createProductDetailsModal() {
     <div class="modal-backdrop" id="productDetailsBackdrop"></div>
     <div class="modal-box">
       <button type="button" class="modal-close" id="closeDetailsModal">×</button>
-      <h2 id="productDetailsTitle"></h2>
-      <p id="productDetailsDescription"></p>
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <img id="productDetailsImage" src="" alt="" style="width:160px;height:auto;border-radius:8px;object-fit:cover;display:none;margin-right:12px" />
+        <div style="flex:1;min-width:200px">
+          <h2 id="productDetailsTitle"></h2>
+          <p id="productDetailsDescription"></p>
+        </div>
+      </div>
       <div id="productDetailsSpecs" class="product-specs"></div>
       <form id="productDetailsForm" class="product-details-form"></form>
       <div class="modal-actions">
@@ -1247,14 +1185,67 @@ function createProductDetailsModal() {
 
 let activeProductDetails = null;
 
+function setupPageButtonToggle(buttonId, targetId) {
+  const button = document.getElementById(buttonId);
+  const target = document.getElementById(targetId);
+  if (!button || !target) return;
+
+  button.addEventListener('click', () => {
+    const isShown = target.style.display === 'block';
+    if (isShown) {
+      target.style.display = 'none';
+      return;
+    }
+
+    // Ao abrir esta secção, fechar as outras secções do menu para melhor UX.
+    const otherIds = ['menuList', 'contatosTable', 'historyBox', 'infoBox'];
+    otherIds.forEach(id => {
+      if (id === targetId) return;
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+
+    target.style.display = 'block';
+  });
+}
+
+function setupPageButtons() {
+  setupPageButtonToggle('menuButton', 'menuList');
+  setupPageButtonToggle('contatosButton', 'contatosTable');
+  setupPageButtonToggle('historiaButton', 'historyBox');
+  setupPageButtonToggle('informacaoButton', 'infoBox');
+}
+
 // Abre o popup de detalhes do produto e preenche as informações dinâmicas.
 function openProductDetailsPopup(productId, productName, productPrice) {
   const details = getProductDetails(productId, productName, productPrice);
   activeProductDetails = { productId, productName, productPrice, details };
   createProductDetailsModal();
 
+  // Preencher título e descrição
   document.getElementById('productDetailsTitle').textContent = details.title;
   document.getElementById('productDetailsDescription').textContent = details.description;
+
+  // Tentar inserir imagem do card correspondente (procura por h3 igual ao nome)
+  const cards = Array.from(document.querySelectorAll('.product-card'));
+  let imgSrc = '';
+  for (const c of cards) {
+    const h = c.querySelector('h3');
+    if (!h) continue;
+    if (h.textContent.trim() === productName || h.textContent.trim().includes(productName)) {
+      const img = c.querySelector('img');
+      if (img && img.getAttribute('src')) { imgSrc = img.getAttribute('src'); break; }
+    }
+  }
+
+  const imgEl = document.getElementById('productDetailsImage');
+  if (imgSrc) {
+    imgEl.src = imgSrc;
+    imgEl.style.display = 'block';
+  } else {
+    imgEl.style.display = 'none';
+    imgEl.src = '';
+  }
 
   const specsContainer = document.getElementById('productDetailsSpecs');
   specsContainer.innerHTML = Object.entries(details.specs)
@@ -1317,13 +1308,38 @@ function parseAddButton(button) {
 // Cria e insere um botão "Ver mais" em cada card de produto.
 function setupProductDetailsButtons() {
   const cards = document.querySelectorAll('.product-card');
+  function slugify(text) {
+    return (text || '')
+      .toString()
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[ -\u007F]/g, function(c){return c;})
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
   cards.forEach((card) => {
     if (card.querySelector('.details-button')) return;
-    const addButton = card.querySelector('button[onclick^="addToCart"]');
-    if (!addButton) return;
 
-    const productInfo = parseAddButton(addButton);
-    if (!productInfo) return;
+    // Tenta obter dados a partir do botão de adicionar
+    const addButton = card.querySelector('button[onclick^="addToCart"]');
+    let productInfo = null;
+    if (addButton) productInfo = parseAddButton(addButton);
+
+    // Se parse falhar, extrai do DOM (h3 e p)
+    if (!productInfo) {
+      const nameEl = card.querySelector('h3');
+      const priceEl = card.querySelector('p');
+      const productName = nameEl ? nameEl.textContent.trim() : 'Produto';
+      let productPrice = 0;
+      if (priceEl) {
+        const m = priceEl.textContent.match(/([0-9]+(?:\.[0-9]+)?)/);
+        if (m) productPrice = parseFloat(m[1]);
+      }
+      const productId = card.dataset.productId || slugify(productName) || 'produto-unknown';
+      productInfo = { productId, productName, productPrice };
+    }
 
     const detailsButton = document.createElement('button');
     detailsButton.type = 'button';
@@ -1333,13 +1349,16 @@ function setupProductDetailsButtons() {
       openProductDetailsPopup(productInfo.productId, productInfo.productName, productInfo.productPrice);
     });
 
-    addButton.insertAdjacentElement('afterend', detailsButton);
+    // Inserir após o botão de adicionar se existir, caso contrário no final do card
+    if (addButton) addButton.insertAdjacentElement('afterend', detailsButton);
+    else card.appendChild(detailsButton);
   });
 }
 
 // Inicializa as funcionalidades de carrinho e detalhes ao carregar a página.
 function initializeCartFeatures() {
   updateCartCount();
+  setupPageButtons();
   setupProductDetailsButtons();
   createProductDetailsModal();
 }

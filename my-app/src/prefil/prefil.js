@@ -2,7 +2,7 @@
 
 // Chave usada para armazenar os dados de autenticação do utilizador.
 const AUTH_KEY = 'lojaUserAuth';
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = '/api';
 
 // Lê os dados do utilizador do localStorage e retorna o objeto salvo.
 function getUser() {
@@ -410,6 +410,11 @@ function confirmLogout() {
 window.addEventListener('load', () => {
   const user = getUser();
   if (user && user.loggedIn) {
+    if (user.role === 'admin') {
+      window.location.href = '../admin/admin.html';
+      return;
+    }
+
     // Ocultar formulários
     const authSection = document.getElementById('authSection');
     const profileSection = document.getElementById('profileSection');
