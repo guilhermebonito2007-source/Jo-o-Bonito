@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Login Seguro - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert-error {
+            background-color: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+            display: block;
+        }
+
+        .alert-success {
+            background-color: #efe;
+            color: #3c3;
+            border: 1px solid #cfc;
+            display: block;
+        }
+
+        .alert-info {
+            background-color: #eef;
+            color: #33c;
+            border: 1px solid #ccf;
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .credentials-info {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .credentials-info strong {
+            color: #333;
+        }
+
+        .token-display {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 11px;
+            color: #333;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .user-info {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            padding: 10px;
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .logout-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>🔐 Admin Login</h1>
+            <p>Painel de Administração Seguro</p>
+        </div>
+
+        <div id="alertBox" class="alert"></div>
+
+        <div class="credentials-info">
+            <strong>Credenciais de Teste:</strong><br>
+            Email: <strong>admin@loja.pt</strong><br>
+            Password: <strong>Admin@123</strong>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="admin@loja.pt"
+                    value="admin@loja.pt"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Palavra-passe</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="••••••••"
+                    value="Admin@123"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-login" id="submitBtn">
+                Entrar
+            </button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px; color: #666; font-size: 12px;">Autenticando...</p>
+            </div>
+        </form>
+
+        <div id="userInfo" class="user-info">
+            <p><strong>Utilizador:</strong> <span id="userName"></span></p>
+            <p><strong>Email:</strong> <span id="userEmail"></span></p>
+            <p><strong>Role:</strong> <span id="userRole"></span></p>
+        </div>
+
+        <div id="tokenDisplay" class="token-display">
+            <strong>JWT Token:</strong><br>
+            <span id="tokenValue"></span>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn-secondary" id="toggleTokenBtn" style="display: none;">
+                Ver Token
+            </button>
+            <button type="button" class="btn-secondary logout-btn" id="logoutBtn" style="display: none;">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <script src="secure-login.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="prefil.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">Login</h1>
+    </div>
+  </header>
+
+  <a href="../index.html" class="btn-voltar">← Voltar</a>
+
+  <!-- Seção de Login/Criar Conta -->
+  <div id="authSection" class="auth-section">
+    <main class="auth-container">
+      <h1>Bem-vindo</h1>
+      
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Login</button>
+        <button class="tab-btn" data-tab="signup">Criar Conta</button>
+      </div>
+
+      <!-- Login -->
+      <div id="loginTab" class="tab-content active">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Palavra-passe:</label>
+            <input type="password" id="loginPassword" name="password" required>
+            <a href="recuperar-palavra-passe.html" class="forgot-password-link" target="_blank" rel="noopener">Recuperar palavra-passe</a>
+          </div>
+          <button type="submit" class="btn-submit">Entrar</button>
+        </form>
+      </div>
+
+      <!-- Criar Conta -->
+      <div id="signupTab" class="tab-content">
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="signupName">Nome:</label>
+            <input type="text" id="signupName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">Email:</label>
+            <input type="email" id="signupEmail" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Palavra-passe:</label>
+            <input type="password" id="signupPassword" name="password" required>
+          </div>
+          <div class="form-group">
+            <label for="signupConfirmPassword">Confirmar Palavra-passe:</label>
+            <input type="password" id="signupConfirmPassword" name="confirmPassword" required>
+          </div>
+          <button type="submit" class="btn-submit">Criar Conta</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Seção de Perfil Autenticado -->
+  <div id="profileSection" class="profile-section" style="display:none;">
+    <main class="profile-container">
+      <div id="profileDiv"></div>
+    </main>
+  </div>
+
+  <script src="../cart.js"></script>
+  <script src="prefil.js"></script>
+</body>
+</html>

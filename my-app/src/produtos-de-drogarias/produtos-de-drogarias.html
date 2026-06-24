@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos de Drogarias</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="produtos de drogarias.css">
+</head>
+<body>
+    <div class="menu-container">
+        <button class="menu-button" id="menuButton" type="button">Menu</button>
+        <button class="menu-button" id="contatosButton" type="button">Contatos</button>
+        <ul class="menu-list" id="menuList">
+          <li><a href="../produtos-de-limpeza/produtos-de-limpeza.html">Produtos De Limpeza</a></li>
+            <li><a href="../produtos-de-drogarias/produtos-de-drogarias.html">Produtos de Drogarias</a></li>
+            <li><a href="../fertilizantes/fertilizantes.html">Fertilizantes</a></li>
+            <li><a href="../produtos-de-higiene-pessoal/produtos-de-higiene-pessoal.html">Produtos De Higiene Pessoal</a></li>
+            <li><a href="../produtos-plasticos/produtos-plasticos.html">Produtos Plasticos</a></li>
+        </ul>
+        <div class="contatos-table" id="contatosTable" style="display: none;">
+            <table>
+                <tr>
+                    <th>Telefone</th>
+                    <td>Armazém: 967154934</td>
+                    <td>Escritório: 289713805</td>
+                    <td>Comercial: 913849235</td>
+                    <td>Comercial: 914190584</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>joao_bonito_1970@sapo.pt</td>
+                </tr>
+                <tr>
+                    <th>Endereço</th>
+                    <td>Estrada Nacional 125 Caixa Postal 752 A 8700-173 Olhão</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="cart-badge">
+      <a href="../carrinho/carrinho.html" title="Ver carrinho">
+        🛒
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+    <div class="profile-badge">
+      <a href="../prefil/prefil.html" title="Meu Perfil">
+        <span class="profile-icon">👤</span>
+        <span class="profile-name">Perfil</span>
+      </a>
+    </div>
+    <header>
+        <div class="header-row">
+            <h1 style="color: blue;">João Bonito</h1>
+            <h2 style="color: blue;">Produtos de Drogarias</h2>
+        </div>
+        <!-- search bar removed per user request -->
+    </header>
+
+
+    <main class="product-grid">
+      <section class="product-card">
+        <h3>Cal 5Kg</h3>
+        <img src="cal de 5kg.png" alt="Cal 5Kg" class="clickable-img" onclick="openImageModal('../assets/cal-5kg.jpg')">
+        <p>Preço: 3.10€</p>
+        <button type="button" onclick="addToCart('droga-cal-5kg', 'Cal 5Kg', 3.10)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Cal em Pasta</h3>
+        <img src="cal em pasta.jpg" alt="Cal em Pasta" class="clickable-img" onclick="openImageModal('../assets/cal-em-pasta.jpg')">
+        <p>Preço: 8.99€</p>
+        <button type="button" onclick="addToCart('droga-cal-em-pasta', 'Cal em Pasta', 8.99)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Carvão Vegetal 2Kg</h3>
+        <img src="Carvão Vegetal 2kg.png" alt="Carvão Vegetal 2Kg" class="clickable-img" onclick="openImageModal('../assets/carvao-vegetal-2kg.jpg')">
+        <p>Preço: 2.10€</p>
+        <button type="button" onclick="addToCart('droga-carvao-vegetal-2kg', 'Carvão Vegetal 2Kg', 5.50)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Carvão Vegetal 3Kg</h3>
+        <img src="Carvão Vegetal 3Kg.png" alt="Carvão Vegetal 3Kg" class="clickable-img" onclick="openImageModal('../assets/carvao-vegetal-3kg.jpg')">
+        <p>Preço: 3.80€</p>
+        <button type="button" onclick="addToCart('droga-carvao-vegetal-3kg', 'Carvão Vegetal 3Kg', 3.80)">+ Adicionar</button>
+      </section>
+      <section class="product-card">
+        <h3>Carvão Vegetal 5Kg</h3>
+        <img src="Carvão Vegetal 5Kg.png" alt="Carvão Vegetal 5Kg" class="clickable-img" onclick="openImageModal('../assets/carvao-vegetal-5kg.jpg')">
+        <p>Preço: 5.70€</p>
+        <button type="button" onclick="addToCart('droga-carvao-vegetal-5kg', 'Carvão Vegetal 5Kg', 5.70)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Champô para Cães</h3>
+        <img src="Champô para Cães.jpg" alt="Champô para Cães" class="clickable-img" onclick="openImageModal('../assets/shampoo-para-caes.jpg')">
+        <p>Preço: 2.80€</p>
+        <button type="button" onclick="addToCart('droga-shampoo', 'Champô para Cães', 2.80)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Cola para madeira</h3>
+        <img src="Cola para madeira.jpg" alt="Cola para madeira" class="clickable-img" onclick="openImageModal('../assets/cola-para-madeira.jpg')">
+        <p>Pre�o: 2.05�</p>
+        <button type="button" onclick="addToCart('droga-cola-para-madeira', 'Cola para madeira', 2.05)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Creolina em Garrafa</h3>
+        <img src="Creolina em Garrafa.png" alt="Creolina em Garrafa" class="clickable-img" onclick="openImageModal('../assets/creolina-em-garrafa.jpg')">
+        <p>Pre�o: 2.50�</p>
+        <button type="button" onclick="addToCart('droga-creolina', 'Creolina em Garrafa', 2.50)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Creolina em Lata</h3>
+        <img src="Creolina em Lata.png" alt="Creolina em Lata" class="clickable-img" onclick="openImageModal('../assets/creolina-em-lata.jpg')">
+        <p>Pre�o: 3.50�</p>
+        <button type="button" onclick="addToCart('droga-creolina-lata', 'Creolina em Lata', 3.50)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Petróleo 1 Litro</h3>
+        <img src="Petroleo 1 litro.png" alt="Petróleo 1 Litro" class="clickable-img" onclick="openImageModal('../assets/petroleo-1-litro.jpg')">
+        <p>Preço: 8.00€</p>
+        <button type="button" onclick="addToCart('droga-petroleo', 'Petróleo 1 Litro', 8.00)">+ Adicionar</button>
+
+
+      </section>
+      <section class="product-card">
+        <h3>Petróleo 5 Litros</h3>
+        <img src="Petroleo 5 litros.png" alt="Petróleo 5 Litros" class="clickable-img" onclick="openImageModal('../assets/petroleo-5-litros.jpg')">
+        <p>Preço: 2.90€</p>
+        <button type="button" onclick="addToCart('droga-petroleo-5l', 'Petróleo 5 Litros', 2.90)">+ Adicionar</button>
+
+        
+      </section>
+      <section class="product-card">
+        <h3>Sebo para Calçado</h3>
+        <img src="Sebo para calçado.jpg" alt="Sebo para Calçado" class="clickable-img" onclick="openImageModal('../assets/sebo-para-calcado.jpg')">
+        <p>Preço: 2.80€</p>
+        <button type="button" onclick="addToCart('droga-sebo-calcado', 'Sebo para Calçado', 2.80)">+ Adicionar</button>
+      </section>
+        
+      <div id="cartMessage" class="cart-message"></div>
+    </main>
+
+
+
+
+    <!-- Modal para Zoom de Imagens -->
+    <div class="image-modal" id="imageModal">
+      <button type="button" class="close-modal" id="closeImageModal" aria-label="Fechar">×</button>
+      <img id="zoomedImage" src="" alt="Imagem ampliada">
+    </div>
+
+    <a href="../index.html" class="btn-voltar">← Voltar</a>
+
+    <script src="../menu-helpers.js"></script>
+    <script src="../cart.js"></script>
+    <script src="../image-zoom.js"></script>
+    <script>
+      // Atualiza o contador do carrinho na página do produto.
+      updateCartCount();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Cartão</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body class="checkout-page">
+  <header>
+    <h1 class="pagamento-title">Pagamento com Cartão</h1>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <p>Por favor preencha os dados do cartão para completar o pagamento.</p>
+      <form id="creditCardForm" class="checkout-form">
+        <div>
+          <label for="cardName">Nome no cartão</label>
+          <input id="cardName" name="cardName" type="text" required placeholder="Nome como aparece no cartão" />
+        </div>
+        <div>
+          <label for="cardNumber">Número do cartão</label>
+          <input id="cardNumber" name="cardNumber" type="text" required placeholder="0000 0000 0000 0000" />
+        </div>
+        <div>
+          <label for="expiryDate">Data de validade</label>
+          <input id="expiryDate" name="expiryDate" type="text" required placeholder="MM/AA" />
+        </div>
+        <div>
+          <label for="cvc">CVC</label>
+          <input id="cvc" name="cvc" type="text" required placeholder="CVC" />
+        </div>
+        <div>
+          <label for="cardNotes">Observações</label>
+          <textarea id="cardNotes" name="cardNotes" rows="4" placeholder="Ex.: NIF, entrega, etc."></textarea>
+        </div>
+        <button type="submit" class="checkout-button">Confirmar Pagamento</button>
+      </form>
+      <div class="cart-actions">
+        <a class="back-button" href="checkout.html">← Voltar para o resumo da compra</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../cart.js"></script>
+  <script>
+    // Processa o pagamento simulado do formulário de cartão de crédito.
+    const creditCardForm = document.getElementById('creditCardForm');
+    creditCardForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Obrigado! Os seus dados de cartão foram recebidos. Iremos confirmar o pagamento em breve.');
+      clearCart();
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>

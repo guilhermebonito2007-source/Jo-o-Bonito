@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body>
+  <header class="cart-header">
+    <a href="../index.html" class="cart-back">← Voltar para a loja</a>
+    <h1>Meu Carrinho</h1>
+    <button type="button" class="cart-clear" onclick="clearCart()">Limpar carrinho</button>
+  </header>
+
+  <main>
+    <div id="cartSummary"></div>
+  </main>
+
+  <script src="../cart.js"></script>
+  <script>
+    // Exibe o conteúdo do carrinho e atualiza o contador ao carregar a página.
+    renderCartItems('cartSummary');
+    updateCartCount();
+  </script>
+</body>
+</html>

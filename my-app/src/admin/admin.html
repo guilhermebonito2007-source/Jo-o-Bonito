@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Loja Sende</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#products" class="nav-link" data-section="products">
+                    <span class="icon">📦</span> Produtos
+                </a>
+                <a href="#orders" class="nav-link" data-section="orders">
+                    <span class="icon">🛒</span> Encomendas
+                </a>
+                <a href="#users" class="nav-link" data-section="users">
+                    <span class="icon">👥</span> Utilizadores
+                </a>
+                <a href="#payments" class="nav-link" data-section="payments">
+                    <span class="icon">💳</span> Pagamentos
+                </a>
+                <a href="#reports" class="nav-link" data-section="reports">
+                    <span class="icon">📈</span> Relatórios
+                </a>
+                <a href="#activity" class="nav-link" data-section="activity">
+                    <span class="icon">📋</span> Atividades
+                </a>
+                <a href="#contacts" class="nav-link" data-section="contacts">
+                    <span class="icon">☎</span> Contactos
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-content">
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <div class="header-right">
+                        <div id="userInfo" class="user-info"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="content-section active">
+                    <!-- Welcome Card -->
+                    <div class="welcome-card">
+                        <div class="welcome-header">
+                            <h2>👋 Bem-vindo ao Painel de Administração</h2>
+                            <button class="btn-copy" onclick="copyAdminInfo()" title="Copiar credenciais">📋 Copiar</button>
+                        </div>
+                        <div class="admin-info-grid">
+                            <div class="info-box">
+                                <label>Email:</label>
+                                <p id="adminEmail">joao_bonito_1970@sapo.pt</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Palavra-passe:</label>
+                                <p id="adminPassword">Admin123</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Nome:</label>
+                                <p id="adminName">João Bonito</p>
+                            </div>
+                            <div class="info-box">
+                                <label>Telefone:</label>
+                                <p id="adminPhone">910175058</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card stat-card">
+                            <div class="stat-value" id="totalUsers">0</div>
+                            <div class="stat-label">Utilizadores</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-value" id="totalOrders">0</div>
+                            <div class="stat-label">Encomendas</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-value" id="totalRevenue">€0.00</div>
+                            <div class="stat-label">Receita Total</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-value" id="pendingOrders">0</div>
+                            <div class="stat-label">Encomendas Pendentes</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-value" id="totalProducts">0</div>
+                            <div class="stat-label">Produtos</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-value" id="lowStockProducts">0</div>
+                            <div class="stat-label">Produtos com Baixo Stock</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Products Section -->
+                <section id="productsSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Produtos</h2>
+                        <button class="btn btn-primary" data-action="add-product">+ Novo Produto</button>
+                    </div>
+                    <div id="productsList" class="products-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th>Stock</th>
+                                    <th>Categoria</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="ordersSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Encomendas</h2>
+                        <input type="text" id="ordersSearch" class="search-box" placeholder="Procurar encomenda...">
+                    </div>
+                    <div id="ordersList" class="orders-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Cliente</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Pagamento</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="usersSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Utilizadores</h2>
+                        <input type="text" id="usersSearch" class="search-box" placeholder="Procurar utilizador...">
+                    </div>
+                    <div id="usersList" class="users-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th>Data Registo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Payments Section -->
+                <section id="paymentsSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Pagamentos</h2>
+                        <select id="paymentFilter" class="filter-select">
+                            <option value="">Todos os métodos</option>
+                            <option value="cartao">Cartão</option>
+                            <option value="mbway">MB WAY</option>
+                            <option value="transferencia">Transferência</option>
+                            <option value="multibanco">Multibanco</option>
+                        </select>
+                    </div>
+                    <div id="paymentsList" class="payments-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Referência</th>
+                                    <th>Encomenda</th>
+                                    <th>Montante</th>
+                                    <th>Método</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Reports Section -->
+                <section id="reportsSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Relatórios</h2>
+                    </div>
+                    <div class="reports-grid">
+                        <div class="card report-card">
+                            <h3>Top 10 Produtos Mais Vendidos</h3>
+                            <div id="topProductsList" class="report-content">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Vendas</th>
+                                            <th>Quantidade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="topProductsTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card report-card">
+                            <h3>Relatório de Vendas</h3>
+                            <div class="report-content">
+                                <label>Data Início:</label>
+                                <input type="date" id="salesStartDate">
+                                <label>Data Fim:</label>
+                                <input type="date" id="salesEndDate">
+                                <button id="loadSalesReportBtn" class="btn btn-primary">Carregar Relatório</button>
+                                <div id="salesReportContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Section -->
+                <section id="activitySection" class="content-section">
+                    <div class="section-header">
+                        <h2>Histórico de Atividades</h2>
+                    </div>
+                    <div id="activityList" class="activity-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Utilizador</th>
+                                    <th>Ação</th>
+                                    <th>Descrição</th>
+                                    <th>Data/Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activityTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Contacts Section -->
+                <section id="contactsSection" class="content-section">
+                    <div class="section-header">
+                        <h2>Contactos</h2>
+                    </div>
+                    <div class="contacts-table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Assunto</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Modals -->
+                <div id="productModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" data-action="close-modal">&times;</span>
+                        <h2 id="productModalTitle">Novo Produto</h2>
+                        <form id="productForm">
+                            <div class="form-group">
+                                <label>Nome do Produto</label>
+                                <input type="text" id="productName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Preço</label>
+                                <input type="number" id="productPrice" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Stock</label>
+                                <input type="number" id="productStock" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <input type="text" id="productCategory" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea id="productDescription" rows="4"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-action="close-modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

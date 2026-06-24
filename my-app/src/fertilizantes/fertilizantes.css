@@ -1,0 +1,274 @@
+body {
+    background-image: url('imagemdefertilizante/fotodefertilizante.png');
+    background-size: cover; /* Para cobrir toda a tela */
+    background-repeat: no-repeat; /* Para não repetir a imagem */
+    background-attachment: fixed; /* Para manter a imagem fixa ao rolar */
+}
+
+
+#texto
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(0, 0, 0);
+    text-align:center;
+    margin-top: 20px;
+}
+
+
+
+
+/* ...perfil... */
+.profile-badge {
+  position: fixed;
+  top: 13px;
+  right: 16px;
+  background: #0d0d76;
+  color: #f2f2f2;
+  border-radius: 32px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  z-index: 10000;
+  font-size: 16px;
+}
+
+.profile-badge a {
+  color: #f2f2f2;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-icon {
+  font-size: 18px;
+}
+
+.profile-name {
+  font-weight: 700;
+}
+
+
+
+
+
+
+/* ...carrinho... */
+.cart-badge {
+  position: fixed;
+  top: 13px;
+  right: 120px;
+  background: #0d0d76;
+  color: #e8e8e8;
+  border-radius: 32px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 10px rgb(0, 0, 0);
+  z-index: 9999;
+  font-size: 18px;
+}
+
+.cart-badge a {
+  color: #f2f2f2;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+
+
+/* ...botão de voltar... */
+.btn-voltar {
+  position: fixed;
+  top: 70px;
+  left: 16px;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #ffe100;
+  background-color: #0092fb;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+.btn-voltar:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+/* ...barra de pesquisa... */
+.search-bar {
+    width: auto; /* Remove largura fixa para permitir expansão */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px; /* Remove margem para ficar no mesmo nível do título */
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 500px; /* Aumenta largura para mais larga */
+    border: 1px solid #000000;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: rgb(11, 21, 106);
+    color: rgb(250, 250, 250);
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: rgb(11, 21, 106);
+}
+
+
+
+
+
+
+
+
+/* ... grade de produtos ... */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
+    padding: 20px;
+    max-width: 1220px;
+    margin: 20px auto 40px;
+}
+
+@media (max-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-card {
+    background: rgba(59, 59, 59, 0.135);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: auto;
+    overflow: hidden;
+}
+
+.product-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.15rem;
+}
+
+.product-card p {
+    margin: 12px 0 14px;
+    color: #333333;
+    font-weight: 600;
+}
+
+.product-card button {
+    margin-top: auto;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #0d0d76;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.product-card button:hover {
+    background-color: #0461a4b8;
+    transform: translateY(-1px);
+}
+
+
+
+
+
+
+
+/* ... cartão de produto ... */
+.product-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    margin-bottom: 14px;
+}
+
+.product-card img:hover {
+    transform: scale(1.03);
+}
+
+.image-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    cursor: zoom-out;
+}
+
+.image-overlay.active {
+    display: flex;
+}
+
+.image-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+.image-overlay .overlay-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: #111;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-message {
+    display: none;
+}

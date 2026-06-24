@@ -1,0 +1,168 @@
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 1px solid #ddd;
+  padding: 12px 10px;
+  text-align:left;
+}
+
+.cart-table th.price-cell,
+.cart-table td.price-cell,
+.cart-table th.quantity-cell,
+.cart-table td.quantity-cell {
+  width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cart-table th.actions-cell,
+.cart-table td.actions-cell {
+  width: 220px;
+}
+
+.cart-table th {
+  background: #0d0d76;
+  color: #fff;
+}
+.cart-table td button {
+  margin-right: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background: #0d0d76;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-table td button:hover {
+  background: #2124a1;
+}
+
+.cart-total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: right;
+  margin: 0;
+}
+
+.cart-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px 20px;
+}
+
+.cart-actions button,
+.cart-actions a {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.cart-actions button {
+  border: none;
+  background: #0d0d76;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-actions a {
+  background: #f5f5f5;
+  color: #0d0d76;
+  border: 1px solid rgba(13, 13, 118, 0.2);
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  gap: 12px;
+  background: transparent;
+  border-bottom: none;
+}
+
+.cart-header h1 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.cart-back,
+.cart-clear {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cart-back {
+  background: #f5f5f5;
+  color: #0d0d76;
+  border: 1px solid rgba(13, 13, 118, 0.2);
+}
+
+/* Position back button in top-left for checkout page */
+.checkout-page .cart-back {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 20002;
+}
+
+.cart-clear {
+  border: none;
+  background: #0d0d76;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-back:hover,
+.cart-clear:hover {
+  opacity: 0.9;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  text-align:center
+}
+
+.cart-back:hover {
+  background: #e8e8ff;
+}
+
+.checkout-page header h1 {
+  color: #0000ff;
+}
+
+.cart-actions button:hover,
+.cart-actions a:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 760px) {
+  .cart-table th,
+  .cart-table td {
+    padding: 10px 8px;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

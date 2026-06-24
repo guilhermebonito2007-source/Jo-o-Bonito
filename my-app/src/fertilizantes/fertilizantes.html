@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizantes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="fertilizantes.css">
+</head>
+<body>
+    <div class="menu-container">
+        <button class="menu-button" id="menuButton" type="button">Menu</button>
+        <button class="menu-button" id="contatosButton" type="button">Contatos</button>
+        <ul class="menu-list" id="menuList">
+          <li><a href="../produtos-de-limpeza/produtos-de-limpeza.html">Produtos De Limpeza</a></li>
+            <li><a href="../produtos-de-drogarias/produtos-de-drogarias.html">Produtos de Drogarias</a></li>
+            <li><a href="../fertilizantes/fertilizantes.html">Fertilizantes</a></li>
+            <li><a href="../produtos-de-higiene-pessoal/produtos-de-higiene-pessoal.html">Produtos De Higiene Pessoal</a></li>
+            <li><a href="../produtos-plasticos/produtos-plasticos.html">Produtos Plasticos</a></li>
+        </ul>
+        <div class="contatos-table" id="contatosTable" style="display: none;">
+            <table>
+                <tr>
+                    <th>Telefone</th>
+                    <td>Armazém: 967154934</td>
+                    <td>Escritório: 289713805</td>
+                    <td>Comercial: 913849235</td>
+                    <td>Comercial: 914190584</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>joao_bonito_1970@sapo.pt</td>
+                </tr>
+                <tr>
+                    <th>Endereço</th>
+                    <td>Estrada Nacional 125 Caixa Postal 752 A 8700-173 Olhão</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="cart-badge">
+      <a href="../carrinho/carrinho.html" title="Ver carrinho">
+        🛒
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+    <div class="profile-badge">
+      <a href="../prefil/prefil.html" title="Meu Perfil">
+        <span class="profile-icon">👤</span>
+        <span class="profile-name">Perfil</span>
+      </a>
+    </div>
+
+    <header>
+        <div class="header-row">
+            <h1 style="color: blue;">João Bonito</h1>
+            <h2 style="color: blue;">Fertilizantes</h2>
+        </div>
+        <!-- search bar removed per user request -->
+    </header>
+
+    <main class="product-grid">
+
+      <section class="product-card">
+        <h3>Terra Vegetal 25kg</h3>
+        <img src="terra vegetal 25Kg.png" alt="Terra Vegetal 25kg">
+        <p>Preço: 30.00€</p>
+        <button type="button" onclick="addToCart('fert-terra', 'Terra Vegetal 25kg', 30.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Esturme de Cavalo 50L</h3>
+        <img src="Campocheio esturme de cavalo de 50L.png" alt="Esturme de Cavalo 50L">
+        <p>Preço: 27.00€</p>
+        <button type="button" onclick="addToCart('fert-adubo', 'Esturme de Cavalo 50L', 27.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Cloreto de potássio</h3>
+        <img src="Cloreto de potássio.png" alt="Cloreto de potássio">
+        <p>Preço: 22.00€</p>
+        <button type="button" onclick="addToCart('fert-composto', 'Cloreto de potássio', 22.00)">+ Adicionar</button>
+      </section>
+
+      
+      <section class="product-card">
+        <h3>Corretivo Agrícola Orgânico</h3>
+        <img src="Corretivo Agrícola Orgânico Siro Agro3.png" alt="Corretivo Agrícola Orgânico">
+        <p>Preço: 15.00€</p>
+        <button type="button" onclick="addToCart('fert-corretivo', 'Corretivo Agrícola Orgânico', 15.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Esterco Curtido</h3>
+        <img src="Esterco Curtido.png" alt="Esterco Curtido">
+        <p>Preço: 18.00€</p>
+        <button type="button" onclick="addToCart('fert-esterco-curtido', 'Esterco Curtido', 18.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Esterco de Vaca Granulado 25kg</h3>
+        <img src="Esterco de vaca granulado 25 kg.png" alt="Esterco de Vaca Granulado 25kg">
+        <p>Preço: 23.00€</p>
+        <button type="button" onclick="addToCart('fert-esterco-vaca-25kg', 'Esterco de Vaca Granulado 25kg', 23.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Farinha de Osso</h3>
+        <img src="Farinha de Osso.png" alt="Farinha de Osso">
+        <p>Preço: 15.00€</p>
+        <button type="button" onclick="addToCart('fert-farinha', 'Farinha de Osso', 15.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Hummus de Minhoca</h3>
+        <img src="Hummus de Minhoca.png" alt="Hummus de Minhoca">
+        <p>Preço: 17.80€</p>
+        <button type="button" onclick="addToCart('fert-hummus', 'Hummus de Minhoca', 17.80)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Nitrofoska 25kg</h3>
+        <img src="Nitrofoska 25kg.png" alt="Nitrofoska 25kg">
+        <p>Preço: 19.00€</p>
+        <button type="button" onclick="addToCart('fert-nitrofoska', 'Nitrofoska 25kg', 19.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Peters Professional Plant Starter</h3>
+        <img src="Peters Professional Plant Starter.png" alt="Peters Professional Plant Starter">
+        <p>Preço: 15.90€</p>
+        <button type="button" onclick="addToCart('fert-peters', 'Peters Professional Plant Starter', 15.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Adubo Osmocote 1kg</h3>
+        <img src="Adubo Osmocote 1kg orquideas.png" alt="Adubo Osmocote 1kg">
+        <p>Preço: 12.50€</p>
+        <button type="button" onclick="addToCart('fert-organico', 'Adubo Osmocote 1kg', 12.50)">+ Adicionar</button>
+      </section>
+
+      <section class="product-card">
+        <h3>Superfosfato simples</h3>
+        <img src="Superfosfato simples.png" alt="Superfosfato simples">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-superfosfato', 'Superfosfato simples', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Terra 10L</h3>
+        <img src="TERRA 10  L .png" alt="Terra 10L">
+        <p>Preço: 1.50€</p>
+        <button type="button" onclick="addToCart('fert-terra-10l', 'Terra 10L', 1.50)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Terra 25L</h3>
+        <img src="terra de 25 L .png" alt="Terra 25L">
+        <p>Preço: 3.50€</p>
+        <button type="button" onclick="addToCart('fert-terra-25l', 'Terra 25L', 3.50)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Ureia</h3>
+        <img src="Ureia.png" alt="Ureia">
+        <p>Preço: 13.00€</p>
+        <button type="button" onclick="addToCart('fert-ureia', 'Ureia', 13.00)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Yara Kristalon 25kg</h3>
+        <img src="Yara Kristalon 25kg.png" alt="Yara Kristalon 25kg">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yara-kristalon', 'Yara Kristalon 25kg', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>YaraMila café</h3>
+        <img src="YaraMila Café.png" alt="YaraMila café">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-cafe', 'YaraMila café', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>YaraMila complex</h3>
+        <img src="YaraMila COMPLEX.png" alt="YaraMila complex">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-complex', 'YaraMila complex', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>YaraMila Faster</h3>
+        <img src="YaraMil FASTER.png" alt="YaraMila Faster">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-faster', 'YaraMila Faster', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>YaraMila Olivo</h3>
+        <img src="YaraMila Olivo.png" alt="YaraMila Olivo">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-olivo', 'YaraMila Olivo', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>YaraMila Maizestar</h3>
+        <img src="yaraMila maizestar.png" alt="YaraMila Maizestar">
+        <p>Preço: 12.90€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-maizestar', 'YaraMila Maizestar', 12.90)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Saco de 50 kg de Fertilizantes YARAMILA</h3>
+        <img src="Saco 50kg de Fertilizantes YARAMILA .png" alt="Saco 50kg de Fertilizantes YARAMILA">
+        <p>Preço: 23.30€</p>
+        <button type="button" onclick="addToCart('fert-yaramila-saco-50kg', 'Saco 50kg de Fertilizantes YARAMILA', 23.30)">+ Adicionar</button>
+      </section>
+
+
+      <section class="product-card">
+        <h3>Nitrato de cálcio</h3>
+        <img src="Nitrato de cálcio.png" alt="Nitrato de cálcio">
+        <p>Preço: 16.90€</p>
+        <button type="button" onclick="addToCart('fert-nitrato-calcio', 'Nitrato de cálcio', 16.90)">+ Adicionar</button>
+      </section>
+      
+    </main>
+    <!-- Modal para Zoom de Imagens -->
+    <div class="image-modal" id="imageModal">
+      <button type="button" class="close-modal" id="closeImageModal" aria-label="Fechar">×</button>
+      <img id="zoomedImage" src="" alt="Imagem ampliada">
+    </div>
+
+    <a href="../index.html" class="btn-voltar">← Voltar</a>
+
+    <script src="../menu-helpers.js"></script>
+    <script src="../cart.js"></script>
+    <script src="../image-zoom.js"></script>
+    <script>
+      // Atualiza o contador do carrinho na página do produto.
+      updateCartCount();
+
+      // Cria uma camada de visualização de imagem ao clicar nas imagens dos produtos.
+      document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.createElement('div');
+        overlay.id = 'imageOverlay';
+        overlay.className = 'image-overlay';
+        overlay.innerHTML = '<img id="overlayImage" alt="Imagem ampliada"><button type="button" class="overlay-close" aria-label="Fechar imagem">×</button>';
+        document.body.appendChild(overlay);
+
+        const overlayImage = document.getElementById('overlayImage');
+        const closeButton = overlay.querySelector('.overlay-close');
+
+        // Mostra a imagem ampliada quando o utilizador clica numa miniatura.
+        document.querySelectorAll('.product-card img').forEach((img) => {
+          img.addEventListener('click', function() {
+            overlayImage.src = this.src;
+            overlayImage.alt = this.alt || 'Imagem do produto';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        // Fecha o overlay ao clicar fora da imagem ou no bot�o de fechar.
+        const closeOverlay = function(event) {
+          if (event.target === overlay || event.target === closeButton) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        };
+
+        overlay.addEventListener('click', closeOverlay);
+        closeButton.addEventListener('click', closeOverlay);
+      });
+    </script>
+</body>
+</html>
+
