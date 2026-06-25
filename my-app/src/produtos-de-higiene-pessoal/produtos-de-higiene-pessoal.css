@@ -6,6 +6,17 @@ body {
 }
 
 
+
+
+/* Remove imagem de fundo apenas nesta página */
+body {
+  background-image: none !important;
+  background-color: transparent !important;
+  background: none !important;
+}
+
+
+
 #texto
 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

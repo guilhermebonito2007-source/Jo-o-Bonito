@@ -5,6 +5,15 @@ body {
   background-attachment: fixed;/* Para manter a imagem fixa ao rolar */
 }
 
+/* Remove imagem de fundo apenas nesta página */
+body {
+  background-image: none !important;
+  background-color: transparent !important;
+  background: none !important;
+}
+
+
+
 #texto {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: rgb(0, 0, 0);
