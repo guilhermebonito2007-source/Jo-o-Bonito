@@ -81,6 +81,7 @@ const PRODUCT_DETAILS = {
     options: [
       { name: 'Aroma', label: 'Aroma', values: ['Gel WC Limón Com Cor', 'Gel WC Oceano', 'Limpador WC Eucalipto', 'Gel WC Pinho', 'Limpador WC Limón Sem cor'] },
     ]
+<<<<<<< HEAD
 
   },
   'limpeza-amaciador': {
@@ -96,6 +97,8 @@ const PRODUCT_DETAILS = {
     ]
 
 
+=======
+>>>>>>> 1d298cd1e61743faf780886b394ffa0c454dfc33
   },
   'limpeza-amaciador-da-san': {
     title: 'Amaciador da San',
@@ -484,6 +487,7 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Duração', label: 'Duração', values: ['1kg'] } ]
   },
 
+<<<<<<< HEAD
   'fert-sulfato': {
     title: 'Sulfato de amônio',
     description: 'Fonte rápida de nitrogênio para vegetação verde e vigorosa.',
@@ -491,6 +495,8 @@ const PRODUCT_DETAILS = {
     options: [ { name: 'Aplicação', label: 'Aplicação', values: ['1kg'] } ]
   },
 
+=======
+>>>>>>> 1d298cd1e61743faf780886b394ffa0c454dfc33
   'fert-superfosfato': {
     title: 'Superfosfato simples',
     description: 'Fertilizante fosfatado para desenvolvimento de raízes e flores.',
@@ -709,6 +715,7 @@ const PRODUCT_DETAILS = {
     },
     options: [ { name: 'Cor', label: 'Cor', values: ['Branco'] } ]
   },
+<<<<<<< HEAD
 
   'higiene-champoo': {
     title: 'Châmpoo Premium',
@@ -722,6 +729,8 @@ const PRODUCT_DETAILS = {
       { name: 'Tipo', label: 'Tipo', values: ['3 em 1', 'Anti-caspa', 'Frutos'] },
     ]
   },
+=======
+>>>>>>> 1d298cd1e61743faf780886b394ffa0c454dfc33
   'higiene-esponja': {
     title: 'Esponja Redonda',
     description: 'Esponja de lavagem do corpo.',

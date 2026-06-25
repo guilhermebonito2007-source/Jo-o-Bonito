@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
@@ -9,23 +9,23 @@
 </head>
 <body>
     <div class="menu-container">
-        <button class="menu-button" id="menuButton">Menu</button>
-        <button class="menu-button" id="contatosButton">Contatos</button>
+        <button class="menu-button" id="menuButton" type="button">Menu</button>
+        <button class="menu-button" id="contatosButton" type="button">Contatos</button>
         <ul class="menu-list" id="menuList">
-          <li><a href="../Produtos De Limpeza/Produtos De Limpeza.html">Produtos De Limpeza</a></li>
-            <li><a href="../produtos de drogarias/produtos de drogarias.html">Produtos de Drogarias</a></li>
+          <li><a href="../produtos-de-limpeza/produtos-de-limpeza.html">Produtos De Limpeza</a></li>
+            <li><a href="../produtos-de-drogarias/produtos-de-drogarias.html">Produtos de Drogarias</a></li>
             <li><a href="../fertilizantes/fertilizantes.html">Fertilizantes</a></li>
-            <li><a href="../Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html">Produtos De Higiene Pessoal</a></li>
-            <li><a href="../produtos plasticos/produtos plasticos.html">Produtos Plasticos</a></li>
+            <li><a href="../produtos-de-higiene-pessoal/produtos-de-higiene-pessoal.html">Produtos De Higiene Pessoal</a></li>
+            <li><a href="../produtos-plasticos/produtos-plasticos.html">Produtos Plasticos</a></li>
         </ul>
         <div class="contatos-table" id="contatosTable" style="display: none;">
             <table>
                 <tr>
                     <th>Telefone</th>
-                    <td>Armazém:967154934</td>
-                    <td>Escritório:289713805</td>
-                    <td>Comercial:913849235</td>
-                    <td>Comercial:914190584</td>
+                    <td>Armazém: 967154934</td>
+                    <td>Escritório: 289713805</td>
+                    <td>Comercial: 913849235</td>
+                    <td>Comercial: 914190584</td>
                 </tr>
                 <tr>
                     <th>Email</th>
@@ -57,10 +57,7 @@
             <h1 style="color: blue;">João Bonito</h1>
             <h2 style="color: blue;">Fertilizantes</h2>
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar...">
-            <button type="submit">Buscar</button>
-        </div>
+        <!-- search bar removed per user request -->
     </header>
 
     <main class="product-grid">
@@ -152,15 +149,6 @@
         <button type="button" onclick="addToCart('fert-organico', 'Adubo Osmocote 1kg', 12.50)">+ Adicionar</button>
       </section>
 
-
-      <section class="product-card">
-        <h3>Sulfato de amônio</h3>
-        <img src="Sulfato de amônio.png" alt="Sulfato de amônio">
-        <p>Preço: 13.00€</p>
-        <button type="button" onclick="addToCart('fert-sulfato', 'Sulfato de amônio', 13.00)">+ Adicionar</button>
-      </section>
-
-
       <section class="product-card">
         <h3>Superfosfato simples</h3>
         <img src="Superfosfato simples.png" alt="Superfosfato simples">
@@ -203,7 +191,7 @@
 
       <section class="product-card">
         <h3>YaraMila café</h3>
-        <img src="YaraMila Cafépng.png" alt="YaraMila café">
+        <img src="YaraMila Café.png" alt="YaraMila café">
         <p>Preço: 12.90€</p>
         <button type="button" onclick="addToCart('fert-yaramila-cafe', 'YaraMila café', 12.90)">+ Adicionar</button>
       </section>
@@ -227,17 +215,17 @@
 
       <section class="product-card">
         <h3>YaraMila Olivo</h3>
-        <img src="YaraMilo Olivo.png" alt="YaraMila Olivo">
+        <img src="YaraMila Olivo.png" alt="YaraMila Olivo">
         <p>Preço: 12.90€</p>
         <button type="button" onclick="addToCart('fert-yaramila-olivo', 'YaraMila Olivo', 12.90)">+ Adicionar</button>
       </section>
 
 
       <section class="product-card">
-        <h3>YaraMila maizestar</h3>
-        <img src="yaraMila maizestar.png" alt="YaraMila maizestar">
+        <h3>YaraMila Maizestar</h3>
+        <img src="yaraMila maizestar.png" alt="YaraMila Maizestar">
         <p>Preço: 12.90€</p>
-        <button type="button" onclick="addToCart('fert-yaramila-maizestar', 'YaraMila maizestar', 12.90)">+ Adicionar</button>
+        <button type="button" onclick="addToCart('fert-yaramila-maizestar', 'YaraMila Maizestar', 12.90)">+ Adicionar</button>
       </section>
 
 
@@ -265,31 +253,12 @@
 
     <a href="../index.html" class="btn-voltar">← Voltar</a>
 
+    <script src="../menu-helpers.js"></script>
     <script src="../cart.js"></script>
     <script src="../image-zoom.js"></script>
     <script>
       // Atualiza o contador do carrinho na página do produto.
       updateCartCount();
-
-      // Alterna o menu principal no cabeçalho.
-      document.getElementById('menuButton').addEventListener('click', function() {
-          const menuList = document.getElementById('menuList');
-          if (menuList.style.display === 'block') {
-              menuList.style.display = 'none';
-          } else {
-              menuList.style.display = 'block';
-          }
-      });
-
-      // Alterna a visibilidade da tabela de contactos.
-      document.getElementById('contatosButton').addEventListener('click', function() {
-          const contatosTable = document.getElementById('contatosTable');
-          if (contatosTable.style.display === 'block') {
-              contatosTable.style.display = 'none';
-          } else {
-              contatosTable.style.display = 'block';
-          }
-      });
 
       // Cria uma camada de visualização de imagem ao clicar nas imagens dos produtos.
       document.addEventListener('DOMContentLoaded', function() {
@@ -312,7 +281,7 @@
           });
         });
 
-        // Fecha o overlay ao clicar fora da imagem ou no botão de fechar.
+        // Fecha o overlay ao clicar fora da imagem ou no bot�o de fechar.
         const closeOverlay = function(event) {
           if (event.target === overlay || event.target === closeButton) {
             overlay.classList.remove('active');
@@ -326,3 +295,4 @@
     </script>
 </body>
 </html>
+
