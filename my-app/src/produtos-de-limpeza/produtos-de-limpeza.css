@@ -1,5 +1,5 @@
 body {
-    background-image: url('imagemdelimpezas/fotodelimpezas.png');
+    background-color: #f0f0f0; /* Cor de fundo padrão */
     background-size: cover; /* Para cobrir toda a tela */
     background-repeat: no-repeat; /* Para não repetir a imagem */
     background-attachment: fixed; /* Para manter a imagem fixa ao rolar */
