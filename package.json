@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 8aa06cd650f1654d9b7f274af9542b9fcaeff274
   "name": "loja-sende",
   "version": "1.0.0",
   "private": true,
@@ -12,3 +16,41 @@
   }
 }
 
+<<<<<<< HEAD
+=======
+=======
+  "name": "loja-sende-backend",
+  "version": "1.0.0",
+  "description": "Backend para Loja Sende - E-commerce",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "node prepare-render.js",
+    "init-db": "node init-database.js",
+    "populate-db": "node populate-database.js",
+    "setup": "npm install && node init-database.js && node populate-database.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-validator": "^7.0.0",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "sqlite3": "^5.1.7",
+    "xss": "^1.0.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "allowScripts": {
+    "bcrypt@5.1.1": true,
+    "sqlite3@5.1.7": true
+  }
+}
+>>>>>>> 1d298cd1e61743faf780886b394ffa0c454dfc33
+>>>>>>> 8aa06cd650f1654d9b7f274af9542b9fcaeff274

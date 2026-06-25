@@ -14,7 +14,7 @@
   // CartAPI.loadProducts()
   // CartAPI.handleAddToCart(id, qtd, options, price)
   // CartAPI.handleCheckout(shipping, paymentMethod)
-</script>
+</script>                                   
 <body>
     <div class="menu-container">
         <button class="menu-button" id="menuButton" type="button" onclick="(function(){console.log('debug: menuButton clicked');var e=document.getElementById('menuList'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked menu';})()">Menu</button>
@@ -22,12 +22,11 @@
         <button class="menu-button" id="historiaButton" type="button" onclick="(function(){console.log('debug: historiaButton clicked');var e=document.getElementById('historyBox'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked historia';})()">História</button>
         <button class="menu-button" id="informacaoButton" type="button" onclick="(function(){console.log('debug: informacaoButton clicked');var e=document.getElementById('infoBox'); if(e) e.style.display=(e.style.display==='block')?'none':'block'; var d=document.getElementById('debugPanel'); if(d) d.textContent='clicked informacao';})()">Informação</button>
         <ul class="menu-list" id="menuList">
-          <li><a href="Produtos De Limpeza/Produtos De Limpeza.html">Produtos De Limpeza</a></li>
-            <li><a href="Produtos De Drogarias/Produtos De Drogarias.html">Produtos de Drogarias</a></li>
-            <li><a href="Fertilizantes/Fertilizantes.html">Fertilizantes</a></li>
-            <li><a href="Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html">Produtos De Higiene Pessoal</a></li>
-            <li><a href="produtos plasticos/produtos plasticos.html">Produtos Plásticos</a></li>
-        
+          <li><a href="produtos-de-limpeza/produtos-de-limpeza.html">Produtos De Limpeza</a></li>
+          <li><a href="produtos-de-drogarias/produtos-de-drogarias.html">Produtos de Drogarias</a></li>
+          <li><a href="fertilizantes/fertilizantes.html">Fertilizantes</a></li>
+          <li><a href="produtos-de-higiene-pessoal/produtos-de-higiene-pessoal.html">Produtos de Higiene Pessoal</a></li>
+          <li><a href="produtos-plasticos/produtos-plasticos.html">Produtos Plásticos</a></li>
         </ul>
         <div class="contatos-table" id="contatosTable" style="display: none;">
             <table>
@@ -81,10 +80,7 @@
             <h1>João Bonito</h1>
             <h2>Produtos Químicos</h2>
         </div>
-            <div class="search-bar">
-                <input id="searchInput" type="text" placeholder="Pesquisar...">
-                <button id="searchButton" type="button">Buscar</button>
-            </div>
+            
         </div>
         <!-- ...existing code... -->
         <!-- ...existing code... -->
@@ -107,42 +103,39 @@
                         });
                     }
 
-                    // Mostrar/ocultar a tabela de contactos.
-                    const contatosButton = document.getElementById('contatosButton');
-                    if (contatosButton) {
-                        contatosButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const contatosTable = document.getElementById('contatosTable');
-                            if (!contatosTable) return;
-                            contatosTable.style.display = (contatosTable.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
+      // Mostrar/ocultar a tabela de contactos.
+      document.getElementById('contatosButton').addEventListener('click', function() {
+          const contatosTable = document.getElementById('contatosTable');
+          if (contatosTable.style.display === 'block') {
+              contatosTable.style.display = 'none';
+          } else {
+              contatosTable.style.display = 'block';
+          }
+      });
 
-                    const historiaButton = document.getElementById('historiaButton');
-                    if (historiaButton) {
-                        historiaButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const historyBox = document.getElementById('historyBox');
-                            if (!historyBox) return;
-                            historyBox.style.display = (historyBox.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
+      document.getElementById('historiaButton').addEventListener('click', function() {
+          const historyBox = document.getElementById('historyBox');
+          if (historyBox.style.display === 'block') {
+              historyBox.style.display = 'none';
+          } else {
+              historyBox.style.display = 'block';
+          }
+      });
 
-                    const informacaoButton = document.getElementById('informacaoButton');
-                    if (informacaoButton) {
-                        informacaoButton.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const infoBox = document.getElementById('infoBox');
-                            if (!infoBox) return;
-                            infoBox.style.display = (infoBox.style.display === 'block') ? 'none' : 'block';
-                        });
-                    }
+      document.getElementById('informacaoButton').addEventListener('click', function() {
+          const infoBox = document.getElementById('infoBox');
+          if (infoBox.style.display === 'block') {
+              infoBox.style.display = 'none';
+          } else {
+              infoBox.style.display = 'block';
+          }
+      });
 
-                    // Elementos usados para pesquisa de secções e produtos.
-                    const searchInput = document.getElementById('searchInput');
-                    const searchButton = document.getElementById('searchButton');
+      // Elementos usados para pesquisa de secções e produtos.
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
 
-                    const searchItems = [
+      const searchItems = [
           {keywords: ['produtos de limpeza', 'limpeza', 'limpar', 'detergente líquido', 'desinfetante', 'desentupidor', 'limpa vidros', 'limpa movéis', 'limpa moveis', 'esponja multiuso', 'multiuso', 'balde', 'lixívia kiriko', 'limpa figorifico', 'limpa alumínio', 'lixívia lagarto', 'gel de casa de banho', 'amaciador', 'detergente para a roupa', 'amaciador da san', 'amaciador para a roupa da in', 'amaciador da fun', 'detergente da in 45 dosses', 'detergentes', 'lava tudo', 'loiça maquina/mão', 'limpeza profunda', 'cera/verniz', 'limpador da kiriko', 'esfergona tiras', 'detergente class', 'detergente lagarto', 'detergente', 'flota', 'gel kiriko roupa', 'vassora nº6', 'vasorões', 'escovas', 'esfregão salva unhas', 'lavavajillas', 'lava loiça da in', 'panos', 'lava tudo da in', 'vassora nº3', 'vassora atlântico', 'vassora de criança', 'limpa moveis', 'pinsel especial direito/cruvo-madeira', 'pinsel especial direito/cruvo-plastico', 'pinsel especial de madeira/plastico', 'espanadores', 'esfergonas de algodão da sibina', 'sacos do lixo de 130l', 'mopa de algodão de 45 cm', 'limpa teto', 'acido de 5l', 'acido de 1l'], href: 'Produtos De Limpeza/Produtos De Limpeza.html'},
 
 
@@ -152,7 +145,7 @@
           {keywords: ['fertilizantes', 'Terra Vegetal 25kg', 'Esturme de Cavalo 50L', 'Cloreto de potássio', 'Corretivo Agrícola Orgânico', 'Esterco Curtido', 'Esterco de Vaca Granulado 25kg', 'Farinha de Osso', 'Hummus de Minhoca', 'Nitrofoska 25kg', 'Peters Professional Plant Starter', 'Adubo Osmocote 1kg', 'Sulfato de amônio', 'Superfosfato simples', 'Terra 10L', 'Terra 25L', 'Ureia', 'Yara Kristalon 25kg', 'YaraMila café', 'YaraMila complex', 'YaraMila Faster', 'YaraMila Olivo', 'YaraMila maizestar', 'Saco 50kg de Fertilizantes YARAMILA', 'Nitrato de cálcio'], href: 'Fertilizantes/Fertilizantes.html'},
 
 
-          {keywords: ['produtos de higiene pessoal', 'higiene pessoal', 'higiene', 'pessoal', 'sabonete líquido', 'sabonete liquido', 'sabonete', 'xampu premium', 'xampú premium', 'châmpoo', 'champoo', 'champoo premium', 'desodorizante', 'creme para o corpo', 'escova de dente', 'fio dental', 'papel higiénico', 'papel higienico', 'toalhitas', 'guardanapo', 'algodão', 'algodao', 'esponja redonda', 'esponja de banho', 'esponja de banho para massagem', 'esponja massagem', 'gel de banho', 'pasta de dentes', 'rolo de cozinha'], href: 'Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html'},
+          {keywords: ['produtos de higiene pessoal', 'higiene pessoal', 'higiene', 'pessoal', 'sabonete líquido', 'sabonete liquido', 'xampu premium', 'xampú premium', 'desodorizante', 'creme para o corpo', 'escova de dente', 'fio dental', 'papel higiénico', 'papel higienico', 'toalhitas'], href: 'Produtos De Higiene Pessoal/Produtos De Higiene Pessoal.html'},
 
           
           {keywords: ['produtos plasticos', 'plasticos', 'plásticos', 'plástico', 'detergente líquido', 'desinfetante', 'desentupidor', 'limpa vidros', 'limpa movéis', 'limpa moveis', 'esponja multiuso', 'multiuso', 'balde', 'balde de construção', 'balde redondo', 'cesta para a roupa', 'açafate', 'funil', 'conjunto pá do lixo', 'espanador', 'escova sanitária com suporte', 'escova sanitária sem suporte'], href: 'produtos plasticos/produtos plasticos.html'}
@@ -187,17 +180,13 @@
       }
 
       // Liga a pesquisa ao botão e ao Enter no campo de texto.
-                    if (searchButton) searchButton.addEventListener('click', performSearch);
-                    if (searchInput) searchInput.addEventListener('keydown', function(event) {
-                        if (event.key === 'Enter') {
-                            event.preventDefault();
-                            performSearch();
-                        }
-                    });
-                } catch (err) {
-                    console.error('index.js error:', err);
-                }
-            });
+      searchButton.addEventListener('click', performSearch);
+      searchInput.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+              event.preventDefault();
+              performSearch();
+          }
+      });
     </script>
 </body>
 </html>
