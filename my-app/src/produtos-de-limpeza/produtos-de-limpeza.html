@@ -573,6 +573,50 @@
           });
       }
     </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          var menuButton = document.getElementById('menuButton');
+          var contatosButton = document.getElementById('contatosButton');
+          var historiaButton = document.getElementById('historiaButton');
+          var informacaoButton = document.getElementById('informacaoButton');
+
+          if (menuButton) {
+            menuButton.addEventListener('click', function () {
+              var menuList = document.getElementById('menuList');
+              if (!menuList) return;
+              menuList.style.display = menuList.style.display === 'block' ? 'none' : 'block';
+            });
+          }
+
+          if (contatosButton) {
+            contatosButton.addEventListener('click', function () {
+              var contatosTable = document.getElementById('contatosTable');
+              if (!contatosTable) return;
+              contatosTable.style.display = contatosTable.style.display === 'block' ? 'none' : 'block';
+            });
+          }
+
+          if (historiaButton) {
+            historiaButton.addEventListener('click', function () {
+              var historyBox = document.getElementById('historyBox');
+              if (!historyBox) return;
+              historyBox.style.display = historyBox.style.display === 'block' ? 'none' : 'block';
+            });
+          }
+
+          if (informacaoButton) {
+            informacaoButton.addEventListener('click', function () {
+              var infoBox = document.getElementById('infoBox');
+              if (!infoBox) return;
+              infoBox.style.display = infoBox.style.display === 'block' ? 'none' : 'block';
+            });
+          }
+        } catch (e) {
+          console.error('menu bindings error', e);
+        }
+      });
+    </script>
 </body>
 </html>
 
