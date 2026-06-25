@@ -1,1 +1,14 @@
-{}
+{
+  "name": "loja-sende",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install": "cd my-app/backend && npm install",
+    "start": "cd my-app/backend && npm start",
+    "dev": "cd my-app/backend && npm run dev",
+    "backend:install": "cd my-app/backend && npm install",
+    "backend:start": "cd my-app/backend && npm start",
+    "backend:dev": "cd my-app/backend && npm run dev"
+  }
+}
+

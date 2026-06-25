@@ -147,7 +147,10 @@ function navigateToSection(section) {
     }
 
     // Atualizar nav-link ativo
-    document.querySelector(`[data-section="${section}"]`).classList.add('active');
+    const activeLink = document.querySelector(`[data-section="${section}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
 
     // Atualizar título
     const titles = {
@@ -425,7 +428,7 @@ async function loadPayments() {
     }
 }
 
-async function filterPayments(e) {
+function filterPayments(e) {
     const method = e.target.value;
     const rows = document.querySelectorAll('#paymentsTableBody tr');
     
@@ -510,7 +513,7 @@ async function loadContacts() {
                 <td><span class="status-badge status-${contact.status}">${contact.status}</span></td>
                 <td>${new Date(contact.created_at).toLocaleDateString('pt-PT')}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="viewContact(${contact.id})">Ver</button>
+                    <button class="btn btn-small btn-primary" data-action="view-contact" data-id="${contact.id}">Ver</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -521,7 +524,18 @@ async function loadContacts() {
 }
 
 async function viewContact(contactId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+    try {
+        const response = await fetch(`${API_BASE}/contacts/${contactId}`);
+        if (!response.ok) {
+            showNotification('Contacto não encontrado', 'error');
+            return;
+        }
+        const contact = await response.json();
+        alert(`Contacto #${contact.id}\n\nNome: ${contact.name}\nEmail: ${contact.email}\nTelefone: ${contact.phone}\nStatus: ${contact.status}\nData: ${new Date(contact.created_at).toLocaleDateString('pt-PT')}`);
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao carregar contacto', 'error');
+    }
 }
 
 // ==================== PRODUTOS ====================
@@ -544,8 +558,8 @@ async function loadProducts() {
                 <td>${product.stock}</td>
                 <td>${product.category}</td>
                 <td>
-                    <button class="btn btn-small btn-primary" onclick="editProduct(${product.id})">Editar</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteProduct(${product.id})">Deletar</button>
+                    <button class="btn btn-small btn-primary" data-action="edit-product" data-id="${product.id}">Editar</button>
+                    <button class="btn btn-small btn-danger" data-action="delete-product" data-id="${product.id}">Deletar</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -556,7 +570,31 @@ async function loadProducts() {
 }
 
 async function editProduct(productId) {
-    showNotification('Funcionalidade em desenvolvimento', 'info');
+  try {
+        const response = await fetch(`${API_BASE}/products/${productId}`);
+        if (!response.ok) {
+            showNotification('Produto não encontrado', 'error');
+            return;
+        }
+        const product = await response.json();
+        const newName = prompt('Novo nome:', product.name);
+        if (newName && newName !== product.name) {
+            const updateResponse = await fetch(`${API_BASE}/products/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newName })
+            });
+            if (updateResponse.ok) {
+                showNotification('Produto atualizado com sucesso', 'success');
+                loadProducts();
+            } else {
+                showNotification('Erro ao atualizar produto', 'error');
+            }
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao editar produto', 'error');
+    }
 }
 
 async function deleteProduct(productId) {
