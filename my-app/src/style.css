@@ -1,8 +1,9 @@
 body {
-    background-image: url('Simbolo JB .png'); /* Substitua pelo caminho da sua imagem */
-    background-size: cover; /* Para cobrir toda a tela */
-    background-repeat: no-repeat; /* Para não repetir a imagem */
-    background-attachment: fixed; /* Para manter a imagem fixa ao rolar */
+  background-image: none !important;
+  background-size: unset !important;
+  background-repeat: unset !important;
+  background-attachment: scroll !important;
+  background-color: transparent !important;
 }
 
 /* ...menu... */
@@ -189,36 +190,7 @@ header {
 
 
 
-/* ...barra de pesquisa... */
-.search-bar {
-    width: auto; /* Remove largura fixa para permitir expansão */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px; /* Remove margem para ficar no mesmo nível do título */
-}
 
-.search-bar input {
-    padding: 10px;
-    width: clamp(180px, 55vw, 500px);
-    max-width: 100%;
-    border: 1px solid #000000;
-    border-radius: 4px 0 0 4px;
-    min-width: 0;
-}
-
-.search-bar button {
-    padding: 10px 15px;
-    background-color: rgb(14, 38, 198);
-    color: #ffffff;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-}
-
-.search-bar button:hover {
-    background-color: rgb(14, 38, 198);
-}
 
 
 
@@ -756,9 +728,7 @@ main.product-grid {
     text-align: center;
   }
 
-  .search-bar {
-    justify-content: center;
-  }
+  
 
   .cart-badge {
     top: 60px;
@@ -801,19 +771,7 @@ main.product-grid {
     gap: 10px;
   }
 
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .search-bar input,
-  .search-bar button {
-    width: 100%;
-    border-radius: 8px;
-  }
+  
 
   .cart-badge,
   .profile-badge {
