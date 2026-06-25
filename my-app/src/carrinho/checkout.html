@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -51,9 +51,8 @@
       </form>
     </section>
 
-    <div class="cart-actions">
-      <a href="carrinho.html">← Voltar para o carrinho</a>
-    </div>
+   <div class="cart-actions"> 
+      <a href="carrinho.html">← Voltar para o carrinho</a>    </div>
   </main>
 
   <script src="../cart.js"></script>
@@ -81,7 +80,7 @@
 
     // Valida o formulário de checkout e finaliza a encomenda.
     const checkoutForm = document.getElementById('checkoutForm');
-    checkoutForm.addEventListener('submit', function(event) {
+    checkoutForm.addEventListener('submit', async function(event) {
       event.preventDefault();
 
       const fullName = document.getElementById('fullName').value.trim();
